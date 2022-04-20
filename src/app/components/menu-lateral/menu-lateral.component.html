@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Fuentes de Google Fonts -->
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!-- Fin Fuentes de Google Fonts -->
+
+<!-- Hack Para Desplegar el Menú activando un checkbox -->
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+  <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+    <img src="assets/img/user.png" alt="" height="20">
+    {{_authService.userName}}</div>
+  </div>
+
+  <header class="header-w">
+    <section class="header-w__description">
+      <h1 class="header-w__title">Bienvenido a Siondal</h1>
+      <br>
+      <br>
+
+     <div style="text-align: left; padding-left: 75px; padding-right: 75px">
+      <ul>
+     <li>  <h4>  Para abrir el menú desplegable presione el icono
+        <img src="assets/img/iconomenu.png" alt="" height="25">
+        situado en la parte superior izquierda de la pantalla. </h4>
+     </li>
+       <br>
+      <li>
+        <h4> Para cerrar el menú presione nuevamente el icono
+        <img src="assets/img/iconomenu.png" alt="" height="25"> cuando el menú se encuentre desplegado.
+      </h4>
+      </li>
+        <br>
+        <li>
+      <h4> El menú será accesible desde todas las pantallas
+        principales para facilitar la navegación. </h4>
+        </li>
+
+        <br *ngIf="
+        user.question1 == 'Pendiente' || user.question2 == 'Pendiente' || user.question3 == 'Pendiente'||
+        user.question1 == '' || user.question2 == '' || user.question3 == ''||
+        user.question1 == null || user.question2 == null || user.question3 == null">
+        <h3 *ngIf="
+        user.question1 == 'Pendiente' || user.question2 == 'Pendiente' || user.question3 == 'Pendiente'||
+        user.question1 == '' || user.question2 == '' || user.question3 == ''||
+        user.question1 == null || user.question2 == null || user.question3 == null">
+          <a (click)="navigateTo('/profile/edit')" class="navmio__item "
+               style="color: red; cursor: pointer">
+           Para <u>RECUPERAR SU CONTRASEÑA</u>, en caso de olvidarla, se requieren
+            las <u>PREGUNTAS DE VERIFICACIÓN</u> que puede completar haciendo <u>CLICK AQUÍ.</u>
+          </a></h3>
+
+
+      </ul>
+     </div>
+
+    </section>
+  </header>
+  </body>
+</main>

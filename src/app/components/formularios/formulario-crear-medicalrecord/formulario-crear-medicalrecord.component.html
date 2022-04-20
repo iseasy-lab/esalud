@@ -1,0 +1,615 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div class="containerR">
+    <div class="containerC" style=" width: 150vh;">
+      <h1 *ngIf="mostrarFormularioInput" class="header-w__title">Editando registro - Historia Clínica Optométrica</h1>
+      <h1 *ngIf="!mostrarFormularioInput" class="header-w__title">Nuevo registro - Historia Clínica Optométrica</h1>
+
+    </div>
+        <div class="containerC" >
+    </div>
+
+
+  </div>
+
+  <form #formularioMedicalRecord="ngForm" (ngSubmit)="createMedicalRecord(formularioMedicalRecord)">
+
+
+  <hr>
+  <h5 class="header-w__title" style="margin-left: 2vw; font-size: 26px">Datos del paciente</h5>
+
+    <br>
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="Nombre" >Nombre</label>
+          <input class="form-control"
+                 id="Nombre"
+                 type="text"
+                 placeholder="Nombre"
+                 name="nombre"
+                 required
+                 minlength="2"
+                 value="{{patientForm.name}}"
+                 disabled
+          >
+
+          <br>
+          <label for="phone" >Teléfono</label>
+          <input class="form-control"
+                 id="phone"
+                 type="text"
+                 placeholder="Teléfono"
+                 name="phone"
+                 value="{{patientForm.phone}}"
+                 maxlength="24"
+                 disabled
+          >
+
+          <br>
+          <label for="occupation" >Ocupación</label>
+          <input class="form-control"
+                 id="occupation"
+                 type="text"
+                 placeholder="Ocupación"
+                 name="position"
+                 value="{{patientForm.occupation}}"
+                 maxlength="32"
+                 disabled
+          >
+
+
+          <br>
+          <label for="date_of_birth" >Fecha de nacimiento</label>
+          <input type="date" class="form-control"
+                 id="date_of_birth"
+                 name="date_of_birth-start"
+                 placeholder="DD/MM/YYYY"
+                 disabled
+                 value="{{patientForm.date_of_birth}}"
+          >
+          <!--                 min="2018-01-01" max="2018-12-31"-->
+
+
+
+        </div>
+      </div>
+
+      <div class="containerC">
+        <div class="form-group">
+
+
+          <label for="identificacion" >Identificación</label>
+          <input class="form-control"
+                 id="identificacion"
+                 type="text"
+                 placeholder="Identificación"
+                 name="identificaction"
+                 required
+                 value="{{patientForm.identification}}"
+                 minlength="5"
+                 maxlength="24"
+                 disabled
+          >
+          <br>
+
+          <label for="email" >Correo electrónico</label>
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 placeholder="name@example.com"
+                 name="email"
+                 email
+                 value="{{patientForm.email}}"
+                 disabled
+          >
+
+
+
+          <br>
+          <label for="address" >Dirección</label>
+          <input class="form-control"
+                 id="address"
+                 type="text"
+                 placeholder="Dirección"
+                 name="position"
+                 value="{{patientForm.address}}"
+                 maxlength="32"
+                 disabled
+          >
+
+
+          <br>
+          <div class="containerR">
+            <div class="containerC" style="padding-left: 0vh">
+          <label for="age" >Edad</label>
+          <input class="form-control"
+                 id="age"
+                 type="text"
+                 placeholder="Edad"
+                 name="age"
+                 [(ngModel)]="age"
+                 value="{{ageForm}}"
+                 maxlength="24"
+                 disabled
+          >
+            </div>
+            <div class="containerC">
+          <label for="gender" >Género</label>
+          <input class="form-control"
+                 id="gender"
+                 type="text"
+                 placeholder="Género"
+                 name="gender"
+                 value="{{patientForm.gender}}"
+                 maxlength="24"
+                 disabled
+          >
+            </div>
+
+          </div>
+          <!--          <div >-->
+          <!--            <br>-->
+          <!--            <label for="medicalCenter">Centro Médico</label>-->
+          <!--            <select class="form-control" id="medicalCenter" name="medicalCenter"  required>-->
+          <!--              <option *ngFor="let medicalCenter of arrayOfMedicalCenters"-->
+          <!--                      value="{{medicalCenter.id}}">{{medicalCenter.name}}</option>-->
+          <!--            </select>-->
+          <!--          </div>-->
+
+
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+<!--        <a href="http://localhost:4200/medicalRecord/patient/{{patient.id}}">-->
+<!--          <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>-->
+<!--        </a>-->
+
+<!--        <a href="http://localhost:4200/patient/edit/{{patientForm.id}}" target="_blank">-->
+        <a (click)="navigateTo('/patient/edit/'+patientForm.id)" style="cursor: pointer">
+        <button type="button" class="btn btn-dark">Editar datos del paciente</button>
+        </a>
+        <!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioPatient.form.valid">Guardar</button>-->
+
+      </div>
+    </div>
+
+  <br>
+
+
+    <hr>
+    <h5 *ngIf="!mostrarFormularioInput" class="header-w__title" style="font-size: 36px; padding-left: 4vw">
+      Fecha: {{actual_date}}
+    </h5>
+    <h5 *ngIf="mostrarFormularioInput" class="header-w__title" style="font-size: 36px; padding-left: 4vw">
+      Fecha: {{date}}
+    </h5>
+
+
+
+    <br>
+  <div style="padding-left: 4vw; padding-right: 1vw">
+    <div class="containerR">
+      <label for="reason">Motivo de la consulta *</label>
+    </div>
+    <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Escriba aquí los sintomas o motivos por los que el paciente solicitó y asistió a la consulta"
+                  id="reason"
+                  name="reason"
+                  [(ngModel)]="reason"
+                  rows="4"
+                  cols="50"
+                  required
+                  maxlength="250"
+                  #motivoCampo = "ngModel"
+        >
+        </textarea>
+      <div *ngIf="motivoCampo.touched && motivoCampo.errors" style="color: red">
+        <p *ngIf="motivoCampo.errors.required"> Campo requerido</p>
+        <!--            <p *ngIf="cargoCampo.errors.minlength">Error: Longitud mínima 3</p>-->
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  <hr>
+  <h5 class="header-w__title" style="font-size: 36px; padding-left: 4vw">Rx</h5>
+
+  <div class="containerR">
+
+    <div class="containerC">
+      <div class="form-group">
+        <h5 class="header-w__title" style="font-size: 26px">Lensometría</h5>
+        <br>
+        <label for="lensometryLE" >Ojo Izquierdo</label>
+        <input class="form-control"
+               id="lensometryLE"
+               type="number"
+               name="lensometryLE"
+               placeholder="Lensometría OI"
+               [(ngModel)]="lensometryLE"
+               value="{{lensometryLE}}"
+               maxlength="10"
+        >
+        <br>
+        <label for="lensometryRE" >Lensometría OD</label>
+        <input class="form-control"
+               id="lensometryRE"
+               type="number"
+               placeholder="Lensometría OD"
+               name="lensometryRE"
+               [(ngModel)]="lensometryRE"
+               value="{{lensometryRE}}"
+               maxlength="10"
+
+        >
+      </div>
+    </div>
+
+    <div class="containerC">
+      <div class="form-group">
+      <h5 class="header-w__title" style="font-size: 26px">Agudeza Visual (AV)</h5>
+      <br>
+      <label for="avLE" >Ojo Izquierdo</label>
+      <input class="form-control"
+             id="avLE"
+             type="number"
+             name="avLE"
+             [(ngModel)]="avLE"
+             placeholder="AV OI"
+             value="{{avLE}}"
+             maxlength="10"
+
+      >
+      <br>
+      <label for="avRE" >Ojo Derecho</label>
+      <input class="form-control"
+             id="avRE"
+             type="number"
+             placeholder="AV OD"
+             name="avRE"
+             [(ngModel)]="avRE"
+             value="{{avRE}}"
+             maxlength="10"
+
+      >
+      </div>
+    </div>
+
+  </div>
+
+
+  <hr>
+  <h5 class="header-w__title" style="font-size: 36px; padding-left: 4vw">Rx Final</h5>
+
+  <div class="containerR" style="padding-right: 1vw">
+
+    <!-- Esfera   -->
+    <div class="containerC">
+      <div class="form-group">
+        <h5 class="header-w__title" style="font-size: 26px">Esfera</h5>
+        <br>
+        <label for="sphereLE" >Ojo Izquierdo</label>
+        <input class="form-control"
+               id="sphereLE"
+               type="number"
+               placeholder="Esfera OI"
+               name="sphereLE"
+               [(ngModel)]="sphereLE"
+               value="{{sphereLE}}"
+               maxlength="10"
+        >
+        <br>
+        <label for="sphereRE" >Ojo Derecho</label>
+        <input class="form-control"
+               id="sphereRE"
+               type="number"
+               placeholder="Esfera OD"
+               name="sphereRE"
+               [(ngModel)]="sphereRE"
+               value="{{sphereRE}}"
+               maxlength="10"
+
+        >
+      </div>
+    </div>
+
+    <!-- Cilindro   -->
+    <div class="containerC">
+      <div class="form-group">
+        <h5 class="header-w__title" style="font-size: 26px">Cilindro</h5>
+        <br>
+        <label for="cylinderLE" >Ojo Izquierdo</label>
+        <input class="form-control"
+               id="cylinderLE"
+               type="number"
+               placeholder="Cilindro OI"
+               name="cylinderLE"
+               [(ngModel)]="cylinderLE"
+               value="{{cylinderLE}}"
+               maxlength="10"
+
+        >
+        <br>
+        <label for="cylinderRE" >Ojo Derecho</label>
+        <input class="form-control"
+               id="cylinderRE"
+               type="number"
+               placeholder="Cilindro OD"
+               name="cylinderRE"
+               [(ngModel)]="cylinderRE"
+               value="{{cylinderRE}}"
+               maxlength="10"
+
+        >
+      </div>
+    </div>
+
+    <!-- Eje   -->
+    <div class="containerC">
+      <div class="form-group">
+        <h5 class="header-w__title" style="font-size: 26px">Eje</h5>
+        <br>
+        <label for="axisLE" >Ojo Izquierdo</label>
+        <input class="form-control"
+               id="axisLE"
+               type="number"
+               name="axisLE"
+               placeholder="Eje OI"
+               [(ngModel)]="axisLE"
+               value="{{axisLE}}"
+               maxlength="10"
+
+        >
+        <br>
+        <label for="axisRE" >Ojo Derecho</label>
+        <input class="form-control"
+               id="axisRE"
+               type="number"
+               placeholder="Eje OD"
+               name="axisRE"
+               [(ngModel)]="axisRE"
+               value="{{axisRE}}"
+               maxlength="10"
+
+        >
+      </div>
+    </div>
+
+    <!-- Prisma   -->
+    <div class="containerC">
+      <div class="form-group">
+        <h5 class="header-w__title" style="font-size: 26px">Prisma</h5>
+        <br>
+        <label for="prismLE" >Ojo Izquierdo</label>
+        <input class="form-control"
+               id="prismLE"
+               type="number"
+               placeholder="Prisma OI"
+               name="prismRE"
+               [(ngModel)]="prismLE"
+               value="{{prismLE}}"
+               maxlength="10"
+
+        >
+        <br>
+        <label for="prismRE" >Ojo Derecho</label>
+        <input class="form-control"
+               id="prismRE"
+               type="number"
+               placeholder="Prisma OD"
+               name="prismRE"
+               [(ngModel)]="prismRE"
+               value="{{prismRE}}"
+               maxlength="10"
+
+        >
+      </div>
+    </div>
+
+    <!-- AV   -->
+    <div class="containerC">
+      <div class="form-group">
+        <h5 class="header-w__title" style="font-size: 26px">AV</h5>
+        <br>
+        <label for="avLEFinal" >Ojo Izquierdo</label>
+        <input class="form-control"
+               id="avLEFinal"
+               type="number"
+               placeholder="AV OI Rx Final"
+               value="{{avLEFinal}}"
+               name="avLEFinal"
+               [(ngModel)]="avLEFinal"
+               maxlength="10"
+
+        >
+        <br>
+        <label for="avREFinal" >Ojo Derecho</label>
+        <input class="form-control"
+               id="avREFinal"
+               type="number"
+               placeholder="AV OD Rx Final"
+               name="avREFinal"
+               value="{{avREFinal}}"
+               [(ngModel)]="avREFinal"
+               maxlength="10"
+
+        >
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="containerR" style="padding-right: 1vw">
+
+    <!-- ADD   -->
+    <div class="containerC">
+      <div class="form-group">
+<!--        <h5 class="header-w__title" style="font-size: 26px">ADD</h5>-->
+        <br>
+        <label for="ADD" >ADD</label>
+        <input class="form-control"
+               id="ADD"
+               type="number"
+               placeholder="ADD"
+               name="ADD"
+               value="{{ADD}}"
+               [(ngModel)]="ADD"
+               maxlength="10"
+
+        >
+      </div>
+    </div>
+
+    <!-- DP   -->
+    <div class="containerC">
+      <div class="form-group">
+<!--        <h5 class="header-w__title" style="font-size: 26px">DP</h5>-->
+        <br>
+        <label for="DP" >DP</label>
+        <input class="form-control"
+               id="DP"
+               type="number"
+               placeholder="DP"
+               name="DP"
+               [(ngModel)]="DP"
+               value="{{DP}}"
+               maxlength="10"
+
+        >
+
+      </div>
+    </div>
+
+    <!-- ALT   -->
+    <div class="containerC">
+      <div class="form-group">
+<!--        <h5 class="header-w__title" style="font-size: 26px">ALT</h5>-->
+        <br>
+        <label for="ALT" >ALT</label>
+        <input class="form-control"
+               id="ALT"
+               type="number"
+               placeholder="ALT"
+               name="ALT"
+               [(ngModel)]="ALT"
+               value="{{ALT}}"
+               maxlength="10"
+
+        >
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <hr>
+
+  <div style="padding-left: 4vw; padding-right: 1vw">
+    <div class="containerR">
+      <label for="remark">Observación</label>
+    </div>
+    <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Escriba aquí las observaciones generadas durante la consulta."
+                  id="remark" name="remark" [(ngModel)]="remark" rows="2" cols="50" maxlength="240">
+        </textarea>
+    </div>
+  </div>
+
+  <hr>
+  <div style="padding-left: 4vw; padding-right: 1vw">
+    <div class="containerR">
+      <label for="indications">Indicación</label>
+    </div>
+    <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Escriba aquí las indicaciones dadas al paciente."
+                  id="indications" name="indications" [(ngModel)]="indications" rows="2" cols="50" maxlength="240">
+        </textarea>
+    </div>
+  </div>
+
+  <hr>
+  <div class="containerC">
+  <label for="lunaTipo">Tipo de luna *</label>
+  <select  class="form-control" id="lunaTipo" name="lunaTipo" #lunaCampo = "ngModel" [(ngModel)]="lunaTipo" required>
+    <option value="Sin selección" selected> Sin selección </option>
+    <option value="Progresivos"> Progresivos </option>
+    <option value="Bifocal"> Monofocal </option>
+    <option value="Bifocal"> Bifocal </option>
+  </select>
+
+    <div *ngIf="lunaCampo.touched && lunaCampo.errors" style="color: red">
+      <p *ngIf="lunaCampo.errors.required"> Campo requerido</p>
+      <!--            <p *ngIf="cargoCampo.errors.minlength">Error: Longitud mínima 3</p>-->
+    </div>
+
+  </div>
+
+  <br>
+  <hr>
+  <br>
+
+
+  <div class="containerC">
+    <div class="containerR">
+
+<!--      <a href="http://localhost:4200/medicalRecord/patient/{{patientForm.id}}">-->
+      <a (click)="navigateTo('/medicalRecord/patient/' + patientForm.id)" style="cursor: pointer">
+      <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+      </a>
+
+      <button title="Se requiere registrar como mínimo el MOTIVO y seleccionar un TIPO DE LUNA" type="submit" class="btn btn-dark" [disabled]="!formularioMedicalRecord.form.valid">Guardar</button>
+
+
+<!--      <a (click)="navigateTo('/tests/'+idMedicalRecord)" style="cursor: pointer">-->
+<!--      <button  *ngIf="mostrarFormularioInput" type="button" class="btn btn-success" style="margin-left: 2vw; min-width: 7vw">Tests</button>-->
+<!--      </a>-->
+
+
+    </div>
+  </div>
+  <br>
+  <br>
+
+  </form>
+
+
+  </body>
+</main>
+

@@ -1,0 +1,179 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Fuentes de Google Fonts -->
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!-- Fin Fuentes de Google Fonts -->
+
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{this.name}}</div>
+  </div>
+
+  <div class="containerR">
+    <div class="containerC">
+      <h1 class="header-w__title">Test de Farnsworth Munsell</h1>
+      <p class="card-text" style="font-size: 18px">• Ordene las piezas mostradas en base a los tonos presentados.</p>
+      <p class="card-text" style="font-size: 18px">• Las piezas de cada extremo son fijas y sirven como referencia del orden a seguir.</p>
+      <p class="card-text" style="font-size: 18px">• Para mover una pieza haga clic izquierdo sobre la misma y, sin dejar de presionar el botón izquierdo del mouse, muevala a la posición deseada.</p>
+    </div>
+  </div>
+  <br>
+
+  <br>
+  <div class="padding">
+
+    <div class="containerR" style="justify-content: space-around" >
+      <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop1($event)" >
+        <!--  elemento fijo inicial -->
+        <div  class="example-box"  style="border: 1px solid black; background-color: #c6716c; height: 7vh; width: 3vw" >  </div>
+        <!--        -->
+        <div *ngFor="let element of arrayBox1" >
+          <div  class="example-box" [ngStyle]="{ background: element.color }"
+                style="border: 1px solid black; height: 7vh; width: 3vw" cdkDrag [cdkDragData]="element">  </div>
+<!--                style="border: 1px solid black; height: 7vh; width: 3vw" cdkDrag [cdkDragData]="element"> {{element.position}} </div>-->
+        </div>
+        <!--  elemento fijo final -->
+        <div  class="example-box"  style="border: 1px solid black; background-color: #97922a; height: 7vh; width: 3vw" >  </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="containerR" style="justify-content: space-around" >
+      <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop2($event)" >
+        <!--  elemento fijo inicial -->
+        <div  class="example-box"  style="border: 1px solid black; background-color: #97922a; height: 7vh; width: 3vw" >  </div>
+        <!--        -->
+        <div *ngFor="let element of arrayBox2" >
+          <div  class="example-box" [ngStyle]="{ background: element.color }"
+                style="border: 1px solid black; height: 7vh; width: 3vw" cdkDrag [cdkDragData]="element"> </div>
+<!--                style="border: 1px solid black; height: 7vh; width: 3vw" cdkDrag [cdkDragData]="element"> {{element.position}} </div>-->
+        </div>
+        <!--  elemento fijo final -->
+        <div  class="example-box"  style="border: 1px solid black; background-color: #3aa48d; height: 7vh; width: 3vw" >  </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="containerR" style="justify-content: space-around" >
+      <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop3($event)" >
+        <!--  elemento fijo inicial -->
+        <div  class="example-box"  style="border: 1px solid black; background-color: #3aa48d; height: 7vh; width: 3vw" >  </div>
+        <!--        -->
+        <div *ngFor="let element of arrayBox3" >
+          <div  class="example-box" [ngStyle]="{ background: element.color }"
+                style="border: 1px solid black; height: 7vh; width: 3vw" cdkDrag [cdkDragData]="element">  </div>
+<!--                style="border: 1px solid black; height: 7vh; width: 3vw" cdkDrag [cdkDragData]="element"> {{element.position}} </div>-->
+        </div>
+        <!--  elemento fijo final -->
+        <div  class="example-box"  style="border: 1px solid black; background-color: #838bbc; height: 7vh; width: 3vw" >  </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="containerR" style="justify-content: space-around" >
+      <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="drop4($event)" >
+        <!--  elemento fijo inicial -->
+        <div  class="example-box"  style="border: 1px solid black; background-color: #838bbc; height: 7vh; width: 3vw" >  </div>
+        <!--        -->
+        <div *ngFor="let element of arrayBox4" >
+          <div  class="example-box" [ngStyle]="{ background: element.color }"
+                style="border: 1px solid black; height: 7vh; width: 3vw" cdkDrag [cdkDragData]="element"> </div>
+<!--                style="border: 1px solid black; height: 7vh; width: 3vw" cdkDrag [cdkDragData]="element"> {{element.position}} </div>-->
+        </div>
+        <!--  elemento fijo final -->
+        <div  class="example-box"  style="border: 1px solid black; background-color: #ca7175; height: 7vh; width: 3vw" >  </div>
+      </div>
+    </div>
+
+    <div *ngIf="finalizado">
+
+      <br>
+      <br>
+
+      <div style="padding-left: 15vw; padding-right: 15vw">
+        <div class="containerR">
+          <label for="conclusion">Conclusiones</label>
+<!--          <label for="conclusion">Conclusiones</label>-->
+        </div>
+        <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Conclusión."
+                  id="conclusion" name="conclusion"  rows="8" maxlength="750" [(ngModel)]="conclusion">
+        </textarea>
+        </div>
+      </div>
+
+<!-- abre escala   -->
+    <br>
+
+
+      <div class="containerR" style="flex-direction: row; justify-content: center" >
+        <!--      <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" >-->
+        <div *ngFor="let element of scale; let i=index" >
+
+          <div *ngIf="arrayOfTotalScore[i]==0" class="example-box4"  >  </div>
+          <div *ngIf="arrayOfTotalScore[i]>0 && arrayOfTotalScore[i]<5" class="example-box5" >  </div>
+          <div *ngIf="arrayOfTotalScore[i]>=5" class="example-box3" >  </div>
+
+        </div>
+        <!--       </div>-->
+      </div>
+
+      <div class="containerR" style="flex-direction: row; justify-content: center" >
+<!--      <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" >-->
+
+        <div *ngFor="let element of scale" >
+          <div  class="example-box2" [ngStyle]="{ background: element.color }">  </div>
+        </div>
+<!--       </div>-->
+    </div>
+
+
+<!--  cierre escala  -->
+    </div>
+
+    <br>
+    <br>
+    <div class="containerR">
+
+      <div *ngIf="!finalizado">
+<!--      <a href="http://localhost:4200/tests/{{this.medicalRecord.id}}">-->
+        <a (click)="navigateTo('/tests/'+this.medicalRecord.id)" style="cursor: pointer">
+        <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+      </a>
+      </div>
+
+      <div *ngIf="!finalizado">
+        <button type="button" (click)="calcularTest()" class="btn btn-success" style="margin-right: 2vw">Finalizar</button>
+      </div>
+
+      <div *ngIf="finalizado">
+        <button type="button"  class="btn btn-success" (click)="subirTest()" style="margin-right: 2vw">Guardar y regresar</button>
+      </div>
+
+
+    </div>
+
+    <br>
+
+  </div>
+
+  </body>
+
+
+</main>

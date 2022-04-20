@@ -1,0 +1,158 @@
+/********************\
+  $Reset ☰
+\********************/
+* {
+  box-sizing:border-box;
+}
+body {
+  margin:0px;
+  padding:0px;
+  /*height: 700px;*/
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(205, 219, 252);
+  /*background-color:#A9BC00;*/
+  /*overflow-y: scroll;*/
+  /*overflow-x: hidden;*/
+}
+a {
+  text-decoration:none;
+}
+/********************\
+  $Layout ☰
+\********************/
+
+
+/*Damos estilos al menú*/
+.navmio {
+  position:absolute;
+  width:200px;
+  height:100vh;
+  top:0;
+  left:-220px; /*Ocultamos el menú en la parte izquierda para que no se vea a menos que pulsemos sobre la hamburguesa*/
+  padding-top:47px;
+  background-color: rgba(29, 33, 32, 1);
+  /*border-right:4px solid rgba(114, 126, 3, 1);*/
+  /*background-color: rgb(210, 224, 250);*/
+  border-right:4px solid rgb(60, 112, 255);
+  transition:all .5s ease; /*Damos a la caja del menú una transición para que tenga un desplazamiento suave*/
+}
+/*Estilos de los li del menú*/
+.navmio__item {
+  display:block;
+  width:96%;
+  margin:0 auto;
+  line-height:2;
+  position:relative; /*Le damos una posición relativa para posteriormente añadirle el triangulo que indica que se está en la página actual del menú*/
+  border-bottom:.5px solid rgba(59, 62, 61, 1);
+  border-top:.5px solid rgba(59, 62, 61, 1);
+  background-color:transparent;
+  font-family: 'Lato', sans-serif;
+  text-align:center;
+  /*Color letra menu*/
+  color:rgba(221, 231, 228, 1);
+}
+
+/*Estos son los estilos del menú que abre y cierra el mismo*/
+.menu-toogle {
+  position:absolute; /*Lo posicionamos absolutamente para poder darle una posición y poder moverlo según el menú esté abierto o cerrado*/
+  width: 35px;
+  line-height:1.1;
+  text-align:center;
+  top:6.5px; /*Le damos una posición top y left en donde queramos que se encuentre la hamburguesa del menú*/
+  left: 8px;
+  border-radius:3px;
+  /*color del icono*/
+  background-color: #142b25;
+  transition: all .5s ease; /*Añadimos una transición para que realice un desplazamineto suave*/
+  z-index:10;
+}
+/*Añadimos el icono de abrir menu y le damos unos estilos*/
+.menu-toogle::before {
+  content:"☰";
+  font-size:32px;
+  color:white;
+}
+
+/* Le damos unos estilos al contenedor principal*/
+.main-w {
+  width:100%;
+  /*height:100vh;*/
+  height:100%;
+  transition: all .5s ease;
+}
+.header-w figure {
+  width:100%;
+  /*height:150px;*/
+  height:150px;
+  text-align:center;
+  position:relative;
+}
+.featured-img {
+  margin:3em 6vw 0 0;
+  border:4px solid white;
+  border-radius:100%;
+}
+.header-w__description {
+  /*width:80%;*/
+  width:100%;
+  height:auto;
+  margin:0 auto;
+  padding:1em;
+  line-height:2;
+  text-align:center;
+  /*Color letra contenido*/
+  /*color:rgba(33, 36, 8, 1);*/
+  /*color: rgb(0, 44, 153);*/
+  color: rgb(0, 0, 0);
+}
+.header-w__title
+{
+  font-size:32px;
+  /*font-size:300%;*/
+  font-family:Lobster;
+  margin:1em 0 0 0;
+}
+.header-w__title2 {
+  font-size:250%;
+  font-family:Lobster;
+  margin:0;
+}
+.paragraph {
+  width:80%;
+  margin:0 auto;
+  text-align:center;
+  font-family:'Source Sans Pro', sans-serif;
+}
+
+/*Estos son los estilos que le dan la funcionalidad al menú*/
+/*El checkbox según esté activado o no hará que el menú aparezca o desaparezca*/
+.checkbox {
+  display:none; /*Ocultamos el checkbox pues no nos interesa que se vea*/
+}
+.checkbox:checked ~ .navmio {
+  left:0px; /*Le quitamos el left negativo para que el menú vuelva a su posición original*/
+  position:fixed; /* Fijamos el menú lateral para que se desplace cuando hagamos scroll*/
+}
+.checkbox:checked ~ .main-w {
+  margin-left:200px; /*Cuando el checkbox asigna un margen al contenedor principal para que se desplace junto con el menú*/
+}
+.checkbox:checked ~ .menu-toogle {
+  left:208px;
+  position:fixed; /*Fijamos la hamburgues para que se desplace junto con el menú*/
+}
+
+.containerC {
+  display: flex; /* or inline-flex */
+  flex-direction: column;
+  width: 100vh;
+  /*background-color: red;*/
+  padding-left: 8vh;
+}
+
+.containerR {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  /*background-color: red;*/
+  /*padding-left: 8vh;*/
+}

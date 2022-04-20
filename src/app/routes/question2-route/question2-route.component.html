@@ -1,0 +1,36 @@
+<div class="body"></div>
+<!--<div class="grad"></div>-->
+<div class="header">
+  <!--  <div><span>Sion</span>Dal</div>-->
+  <img src="assets/img/logotesis.png" height="170" >
+  <!--  width="30"-->
+</div>
+<br>
+
+<form #formularioPasswordReset="ngForm" >
+  <div class="login" >
+    <div class="form-group">
+      <label>Responda la siguiente pregunta por favor.</label>
+      <h3>{{question2}}</h3>
+      <input class="form-control"
+             type="text"
+             placeholder="Ingrese su respuesta aquí"
+             name="answer1User"
+             [(ngModel)]="answer2User"
+             minlength="1"
+             maxlength="256"
+             style="font-size: 18px"
+             #answer1UserCampo = "ngModel">
+
+      <div *ngIf="mensajeMostrar" style="color: red">
+        <p> Campo requerido</p>
+      </div>
+    </div>
+    <br>
+
+    <input type="button" value="Continuar" (click)="continuar()" style="font-size: 18px" >
+    <input type="button" value="Cancelar" (click)="navigateTo('login')" style="font-size: 18px">
+
+  </div>
+
+</form>

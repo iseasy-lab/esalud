@@ -1,0 +1,160 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+  <div class="containerR">
+    <div class="containerC" >
+      <h1 class="header-w__title">Ver consulta</h1>
+    </div>
+
+    <div class="containerC" >
+      <div class="containerCbutton header-w__titlenofont" >
+        <!--  <div class="containerR header-w__titlenofont">-->
+<!--        <a href="http://localhost:4200/tests">-->
+<!--          <button  type="button" class="btn btn-success" style="width: 10vw; margin-right: 10px" >Pruebas</button>-->
+<!--        </a>-->
+<!--        -->
+<!--        <a href="http://localhost:4200/medicalRecord/patient/{{consultation.patient.id}}">-->
+
+
+        <!--          <a (click)="navigateTo('/medicalRecord/patient/'+consultation.patient.id)" style="cursor: pointer">-->
+<!--          <button  type="button" class="btn btn-primary" style="width: 10vw">Historia Clínica</button>-->
+<!--        </a>-->
+
+        <!--  </div>-->
+      </div>
+    </div>
+
+
+  </div>
+
+  <br>
+  <!--  <form #formularioDoctor="ngForm" >-->
+  <form>
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <div>
+            <label for="date">Doctor</label>
+            <input type="text" class="form-control"
+                   value="{{consultation.doctor.name}} - {{consultation.doctor.position}}" disabled>
+          </div>
+
+          <br>
+          <label for="date">Fecha</label>
+          <input type="date" class="form-control"
+                 id="date"
+                 name="date"
+                 placeholder="DD/MM/YYYY" value="{{consultation.date}}"
+                 disabled
+          >
+
+          <br>
+          <div>
+            <label for="date">Estado</label>
+            <input type="text" class="form-control" value="{{consultation.status}}" disabled>
+          </div>
+
+        </div>
+      </div>
+      <div class="containerC">
+        <div class="form-group">
+
+
+          <div>
+            <label for="date">Paciente</label>
+            <input type="text" class="form-control"
+                   value="{{consultation.patient.name}} - {{consultation.patient.identification}}" disabled>
+          </div>
+
+          <br>
+          <label for="time">Hora</label>
+          <input class="form-control" type="time" id="time" name="time"
+                 value="{{consultation.time}}"
+                 disabled>
+          <!--                 min="06:00" max="18:00" -->
+
+
+          <div *ngIf="this._authService.esSuperAdmin">
+            <br>
+            <label for="medicalCenter">Centro Médico</label>
+            <input class="form-control"
+                   id="medicalCenter"
+                   type="text"
+                   name="medicalCenter"
+                   disabled
+                   value="{{medicalCenter.name}}"
+                   minlength="2"
+            >
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div style="padding-left: 4vw; padding-right: 4vh">
+      <div class="containerR">
+        <label for="detail">Motivo de la consulta</label>
+      </div>
+      <div class="containerR">
+        <textarea class="form-control" id="detail" name="detail" rows="4" cols="50"
+                  disabled value="{{consultation.detail}}"
+        >
+        </textarea>
+      </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+<!--        <a href="http://localhost:4200/consultation">-->
+          <a (click)="navigateTo('/consultation')" style="cursor: pointer">
+          <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+<!--        <a href="http://localhost:4200/consultation/edit/{{consultation.id}}">-->
+          <a (click)="navigateTo('/consultation/edit/'+consultation.id)" style="cursor: pointer">
+          <button type="button" class="btn btn-dark" style="margin-right: 2vw">Editar</button>
+        </a>
+
+<!--        <button type="submit" class="btn btn-dark">Guardar</button>-->
+        <!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioDoctor.form.valid">Guardar</button>-->
+
+      </div>
+    </div>
+
+  </form>
+
+
+  </body>
+</main>

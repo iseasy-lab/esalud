@@ -1,0 +1,238 @@
+<!--<app-formulario-crear-doctor-->
+<!--(informacionValidada)="crearDoctor($event)"-->
+<!--&gt;-->
+<!--</app-formulario-crear-doctor>-->
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+  <div class="containerC">
+    <h1 class="header-w__title">Nuevo personal</h1>
+    <br>
+  </div>
+
+
+  <form #formularioDoctor="ngForm">
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="identificacion">Identificación</label>
+          <input class="form-control"
+                 title="Ingrese el valor del documento de identificación"
+                 id="identificacion"
+                 type="text"
+                 placeholder="Identificación"
+                 name="identificaction"
+                 [(ngModel)]="identification"
+                 required
+                 value="{{identification}}"
+                 minlength="5"
+                 maxlength="24"
+                 #identificationCampo = "ngModel"
+          >
+          <div *ngIf="identificationCampo.touched && identificationCampo.errors" style="color: red">
+            <p *ngIf="identificationCampo.errors.required">Campo requerido</p>
+            <p *ngIf="identificationCampo.errors.minlength">Longitud mínima 5</p>
+          </div>
+
+          <br>
+          <label for="Nombre">Nombre</label>
+          <input class="form-control"
+                 title="Ingrese el nombre del nuevo miembro del personal"
+                 id="Nombre"
+                 type="text"
+                 placeholder="Nombre"
+                 name="nombre"
+                 [(ngModel)]="name"
+                 required
+                 minlength="2"
+                 maxlength="124"
+                 value="{{name}}"
+                 #nombreCampo="ngModel"
+          >
+          <div *ngIf="nombreCampo.touched && nombreCampo.errors" style="color: red">
+            <p *ngIf="nombreCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="nombreCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+          <br>
+          <label for="phone">Teléfono</label>
+          <input class="form-control"
+                 title="Ingrese el número de teléfono"
+                 id="phone"
+                 type="text"
+                 placeholder="Teléfono"
+                 name="phone"
+                 [(ngModel)]="phone"
+                 value="{{phone}}"
+                 maxlength="24"
+                 #phoneCampo = "ngModel"
+          >
+<!--          <div *ngIf="phoneCampo.errors" style="color: red">-->
+<!--&lt;!&ndash;          <div *ngIf="phoneCampo.touched && phoneCampo.errors" style="color: red">&ndash;&gt;-->
+<!--&lt;!&ndash;            <p *ngIf="phoneCampo.errors.required">Error: Campo requerido</p>&ndash;&gt;-->
+<!--            <p *ngIf="phoneCampo.errors.minlength">Error: Longitud mínima 5</p>-->
+<!--          </div>-->
+
+          <br>
+          <label for="email">Correo electrónico</label>
+          <input type="email"
+                 title="Ingrese el correo electrónico"
+                 class="form-control"
+                 id="email"
+                 placeholder="name@example.com"
+                 name="email"
+                 maxlength="124"
+                 [(ngModel)]="email"
+                 required
+                 email
+                 #emailCampo="ngModel"
+          >
+          <div *ngIf="emailCampo.touched && emailCampo.errors" style="color: red">
+            <p *ngIf="emailCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="emailCampo.invalid">Ingrese una dirección de correo válida</p>
+          </div>
+
+
+
+
+        </div>
+
+      </div>
+
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="rol">Rol</label>
+          <select title="Seleccione el rol que desea asignar al nuevo miembro del personal"
+                  class="form-control" id="rol" name="rol" [(ngModel)]="rol" required #rolCampo="ngModel">
+            <option>Personal</option>
+            <option>Administrador</option>
+            <option *ngIf="this._authService.esSuperAdmin">SuperAdministrador</option>
+          </select>
+          <div *ngIf="rolCampo.touched && rolCampo.errors" style="color: red">
+            <p *ngIf="rolCampo.errors.required"> Campo requerido</p>
+          </div>
+
+
+
+          <div *ngIf="this._authService.esSuperAdmin">
+            <br>
+            <label for="medicalCenter">Centro Médico</label>
+            <select title="Seleccione el centro médico al que pertenece el nuevo miembro del personal"
+                    class="form-control" id="medicalCenter"
+                    name="medicalCenter" [(ngModel)]="medicalCenter"
+                    required #medicalCenterCampo="ngModel">
+              <option *ngFor="let medicalCenter of arrayOfMedicalCenters"
+                      value="{{medicalCenter.id}}">{{medicalCenter.name}}</option>
+            </select>
+            <div *ngIf="medicalCenterCampo.touched && medicalCenterCampo.errors" style="color: red">
+              <p *ngIf="medicalCenterCampo.errors.required"> Campo requerido</p>
+<!--              <p *ngIf="identificationCampo.errors.minlength">Error: Longitud mínima 5</p>-->
+            </div>
+          </div>
+
+          <br>
+          <label for="Cargo">Cargo</label>
+          <input title="Ingrese el cargo del nuevo miembro del personal"
+                 class="form-control"
+                 id="Cargo"
+                 type="text"
+                 placeholder="Cargo"
+                 name="position"
+                 [(ngModel)]="position"
+                 value="{{position}}"
+                 maxlength="32"
+                 #cargoCampo = "ngModel"
+          >
+          <div *ngIf="cargoCampo.touched && cargoCampo.errors" style="color: red">
+            <p *ngIf="cargoCampo.errors.required"> Campo requerido</p>
+<!--            <p *ngIf="cargoCampo.errors.minlength">Error: Longitud mínima 3</p>-->
+          </div>
+
+          <br>
+          <label for="password">Contraseña temporal</label>
+          <input title="Ingrese la contraseña. Debe tener mínimo 8 caracteres
+e incluir letras minúsculas, mayúsculas y números"
+                 class="form-control"
+                 id="password"
+                 type="password"
+                 placeholder="Contraseña temporal"
+                 name="password"
+                 [(ngModel)]="password"
+                 required
+                 minlength="8"
+                 maxlength="64"
+                 #passwordCampo="ngModel"
+                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          >
+          <div *ngIf="passwordCampo.touched && passwordCampo.errors" style="color: red">
+            <p *ngIf="passwordCampo.errors.required">Campo requerido</p>
+<!--            <p *ngIf="passwordCampo.errors.minlength">Longitud mínima 8</p>-->
+            <p *ngIf="passwordCampo.errors.pattern">
+              La contraseña debe contener al menos 8 caracteres incluyendo letras mayúsculas, minúsculas y números</p>
+          </div>
+
+<!--          <br>-->
+<!--          <label for="status">Estado</label>-->
+<!--          <select class="form-control" id="status" name="status" [(ngModel)]="status" required>-->
+<!--            <option value="true">Habilitado</option>-->
+<!--            <option value="false">Deshabilitado</option>-->
+<!--          </select>-->
+
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+        <!--        <a href="http://localhost:4200/doctor">-->
+        <a (click)="navigateTo('/doctor')" style="cursor: pointer">
+          <button title="Cancelar la creación y regresar" type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+        <!--        <button type="submit" class="btn btn-dark">Guardar</button>-->
+        <button title="Guardar los datos y registrar al nuevo miembro del personal" type="button" (click)="createDoctor()" class="btn btn-dark" [disabled]="!formularioDoctor.form.valid">Guardar</button>
+
+      </div>
+    </div>
+
+  </form>
+
+
+  </body>
+</main>
+

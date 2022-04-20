@@ -1,0 +1,210 @@
+<!--<div *ngIf="mostrarFormulario">-->
+<!--  <app-formulario-crear-doctor-->
+<!--    [nameInput]="doctor.name"-->
+<!--    [identificationInput]="doctor.identification"-->
+<!--    [emailInput]="doctor.email"-->
+<!--    [phoneInput]="doctor.phone"-->
+<!--    [positionInput]="doctor.position"-->
+<!--    [rolInput]="doctor.rol"-->
+<!--    [statusInput]="doctor.status"-->
+<!--    [mostrarFormularioInput]="mostrarFormulario"-->
+<!--    (informacionValidada)="editDoctor($event)"-->
+<!--  >-->
+<!--</app-formulario-crear-doctor>-->
+<!--</div>-->
+
+
+<!--<app-formulario-crear-doctor-->
+<!--(informacionValidada)="crearDoctor($event)"-->
+<!--&gt;-->
+<!--</app-formulario-crear-doctor>-->
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+  <div class="containerC">
+    <h1 class="header-w__title">Editar personal</h1>
+    <br>
+  </div>
+
+
+  <form #formularioDoctor="ngForm">
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="identificacion">Identificación</label>
+          <input class="form-control"
+                 id="identificacion"
+                 title="Ingrese o modifique la identificación"
+                 type="text"
+                 placeholder="Identificación"
+                 name="identificaction"
+                 [(ngModel)]="identification"
+                 required
+                 value="{{identification}}"
+                 minlength="5"
+                 maxlength="24"
+                 #identificationCampo = "ngModel"
+          >
+          <div *ngIf="identificationCampo.touched && identificationCampo.errors" style="color: red">
+            <p *ngIf="identificationCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="identificationCampo.errors.minlength"> Longitud mínima 5</p>
+          </div>
+
+          <br>
+          <label for="Nombre">Nombre</label>
+          <input class="form-control"
+                 id="Nombre"
+                 type="text"
+                 title="Ingrese o modifique el nombre"
+                 placeholder="Nombre"
+                 name="nombre"
+                 [(ngModel)]="name"
+                 required
+                 minlength="2"
+                 maxlength="124"
+                 value="{{name}}"
+                 #nombreCampo="ngModel"
+          >
+          <div *ngIf="nombreCampo.touched && nombreCampo.errors" style="color: red">
+            <p *ngIf="nombreCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="nombreCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+          <br>
+          <label for="phone">Teléfono</label>
+          <input class="form-control"
+                 id="phone"
+                 type="text"
+                 title="Ingrese o modifique el número de teléfono"
+                 placeholder="Teléfono"
+                 name="phone"
+                 [(ngModel)]="phone"
+                 value="{{phone}}"
+                 maxlength="24"
+          >
+
+          <br>
+          <label for="email">Correo electrónico</label>
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 placeholder="name@example.com"
+                 name="email"
+                 [(ngModel)]="email"
+                 required
+                 email
+                 maxlength="124"
+                 #emailCampo="ngModel"
+          >
+          <div *ngIf="emailCampo.touched && emailCampo.errors" style="color: red">
+            <p *ngIf="emailCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="emailCampo.invalid">Ingrese una dirección de correo válida</p>
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="rol">Rol</label>
+          <select title="Seleccione el rol que desea asignar al miembro del personal" class="form-control" id="rol" name="rol" [(ngModel)]="rol" required #rolCampo="ngModel">
+            <option>Personal</option>
+            <option>Administrador</option>
+            <option>SuperAdministrador</option>
+          </select>
+          <div *ngIf="rolCampo.touched && rolCampo.errors" style="color: red">
+            <p *ngIf="rolCampo.errors.required"> Campo requerido</p>
+          </div>
+
+
+          <br>
+          <label for="Cargo">Cargo</label>
+          <input class="form-control"
+                 id="Cargo"
+                 type="text"
+                 title="Ingrese o modifique el cargo del miembro del personal"
+                 placeholder="Cargo"
+                 name="position"
+                 [(ngModel)]="position"
+                 value="{{position}}"
+                 maxlength="32"
+                 #cargoCampo = "ngModel"
+          >
+          <div *ngIf="cargoCampo.touched && cargoCampo.errors" style="color: red">
+            <p *ngIf="cargoCampo.errors.required"> Campo requerido</p>
+            <!--            <p *ngIf="cargoCampo.errors.minlength">Error: Longitud mínima 3</p>-->
+          </div>
+
+          <br>
+          <label for="status">Estado</label>
+          <select title="Seleccione el estado en que se encuentra el miembro del personal" class="form-control" id="status" name="status" [(ngModel)]="status" required #statusCampo="ngModel">
+            <option value="true">Habilitado</option>
+            <option value="false">Deshabilitado</option>
+          </select>
+          <div *ngIf="statusCampo.touched && statusCampo.errors" style="color: red">
+            <p *ngIf="statusCampo.errors.required"> Campo requerido</p>
+            <!--            <p *ngIf="cargoCampo.errors.minlength">Error: Longitud mínima 3</p>-->
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+        <!--        <a href="http://localhost:4200/doctor">-->
+        <a (click)="navigateTo('/doctor')" style="cursor: pointer">
+          <button title="Cancelar los cambios realizados y regresar" type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+        <!--        <button type="submit" class="btn btn-dark">Guardar</button>-->
+        <button title="Guardar los cambios realizados" type="button" (click)="editDoctor()" class="btn btn-dark" [disabled]="!formularioDoctor.form.valid">Guardar</button>
+
+      </div>
+    </div>
+
+  </form>
+
+
+  </body>
+</main>
+
+

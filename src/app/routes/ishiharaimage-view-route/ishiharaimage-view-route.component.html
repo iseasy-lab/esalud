@@ -1,0 +1,129 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div class="containerC">
+    <!--    <h1 *ngIf="mostrarFormularioInput" class="header-w__title">Editar paciente</h1>-->
+    <!--    <h1 *ngIf="!mostrarFormularioInput" class="header-w__title">Nuevo paciente</h1>-->
+    <h1  class="header-w__title">Ver imagen</h1>
+    <br>
+  </div>
+
+
+  <!--  <form #formularioPatient="ngForm" (ngSubmit)="createPatient(formularioPatient)">-->
+  <div class="containerR">
+    <div class="containerC" >
+      <div class="form-group">
+
+        <label for="reference_color">Color de la referencia</label>
+        <input class="form-control"
+               id="reference_color"
+               type="text"
+               placeholder="Inserte los colores con los que se relaciona la imagen"
+               name="reference_color"
+               disabled
+               value="{{imageIshihara.reference_color}}"
+        >
+
+        <br>
+        <label for="real_result">Estado</label>
+        <input class="form-control"
+               id="real_result"
+               type="text"
+               placeholder="Ingrese el valor esperado para la imagen"
+               name="real_result"
+               disabled
+               value="{{imageIshihara.real_result}}"
+               minlength="2"
+        >
+
+        <div *ngIf="this._authService.esSuperAdmin">
+          <br>
+          <label for="medicalCenter">Centro Médico</label>
+          <input class="form-control"
+                 id="medicalCenter"
+                 type="text"
+                 name="medicalCenter"
+                 disabled
+                 value="{{medicalCenter.name}}"
+                 minlength="2"
+          >
+        </div>
+
+        <!--        <br>-->
+        <!--        <label for="file_path">Seleccione una imagen</label>-->
+        <!--        <input (change)="capturarFile($event)" class="form-control" type="file" id="file_path" name="file_path" accept="image/png, image/jpeg">-->
+
+
+        <br>
+        <label for="status">Resultado esperado</label>
+        <input class="form-control"
+               id="status"
+               type="text"
+               placeholder="Ingrese el valor esperado para la imagen"
+               name="status"
+               disabled
+               value="{{statusString}}"
+               minlength="2"
+        >
+
+      </div>
+
+    </div>
+    <div class="containerC" style="align-items: center; justify-content:center; align-content: stretch;">
+      <div class="form-group">
+
+        <div>
+          <img src="http://localhost:1337/{{imageIshihara.path}}" alt="" style="height: 50vh">
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  <div class="containerC">
+    <div class="containerR">
+
+<!--      <a href="http://localhost:4200/imagesIshihara">-->
+        <a (click)="navigateTo('/imagesIshihara')" style="cursor: pointer">
+        <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+      </a>
+
+<!--      <a href="http://localhost:4200/imagesIshihara/edit/{{imageIshihara.id}}">-->
+        <a (click)="navigateTo('/imagesIshihara/edit/'+imageIshihara.id)" style="cursor: pointer">
+      <button type="button" class="btn btn-dark">Editar</button>
+      </a>
+      <!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioPatient.form.valid">Guardar</button>-->
+
+    </div>
+  </div>
+
+  <!--  </form>-->
+
+
+  </body>
+</main>
+

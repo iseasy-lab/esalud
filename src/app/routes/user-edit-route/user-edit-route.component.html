@@ -1,0 +1,139 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Fuentes de Google Fonts -->
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!-- Fin Fuentes de Google Fonts -->
+
+<!-- Hack Para Desplegar el Menú activando un checkbox -->
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+
+  <div class="containerC">
+    <!--  <header class="header-w">-->
+    <!--    <section class="header-w__description">-->
+    <h1 class="header-w__title">Editar usuario</h1>
+    <br>
+    <!--        </section>-->
+    <!--  </header>-->
+  </div>
+
+
+
+  <form>
+    <div class="containerR">
+      <div class="containerC">
+        <!--      <p>{{doctor?.id}}</p>-->
+        <!--      <p>{{doctor?.name}}</p>-->
+        <!--      <p>{{doctor?.identification}}</p>-->
+        <div class="form-group">
+
+          <label for="identification">Identificación</label>
+          <input  maxlength="25" class="form-control"  id="identification" type="text" placeholder="Identificación" name="identification" [(ngModel)]="identification"  value="{{doctor.identification}}" >
+
+          <br>
+          <label for="Nombre">Nombre</label>
+          <input maxlength="128" class="form-control"  id="Nombre" type="text" placeholder="Nombre" name="name" [(ngModel)]="name" value="{{doctor.name}}" >
+
+          <br>
+          <label for="Cargo">Cargo</label>
+          <input maxlength="32" class="form-control"  id="Cargo" type="text" placeholder="Cargo" name="position" [(ngModel)]="position" value="{{doctor.position}}" >
+
+        </div>
+
+      </div>
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="email">Correo electrónico</label>
+          <input maxlength="124" type="email" class="form-control" id="email" placeholder="name@example.com" name="email" [(ngModel)]="email" value="{{doctor.email}}" >
+
+          <!--          <br>-->
+          <!--          <label for="email">Contraseña</label>-->
+          <!--          <input type="email" class="form-control" id="email" placeholder="name@example.com" value="{{doctor.email}}" disabled>-->
+
+          <br>
+          <label for="phone">Teléfono</label>
+          <input maxlength="22" type="phone" class="form-control" id="phone" placeholder="Teléfono" name="phone" [(ngModel)]="phone" value="{{doctor.phone}}" >
+
+          <br>
+          <label for="rol">Rol</label>
+          <select class="form-control" id="rol" name="rol" [(ngModel)]="rol" value="{{doctor.rol}}" >
+            <option>Personal</option>
+            <option>Administrador</option>
+            <option *ngIf="this._authService.esSuperAdmin">SuperAdministrador</option>
+          </select>
+
+          <div *ngIf="this._authService.esSuperAdmin">
+          <br>
+          <label for="status">Estado</label>
+          <select class="form-control" id="status" name="status" [(ngModel)]="status" required>
+            <option value="true">Habilitado</option>
+            <option value="false">Deshabilitado</option>
+          </select>
+          </div>
+
+
+
+
+          <!--          <br>-->
+          <!--          <label for="medicalCenter">Centro Médico</label>-->
+          <!--          <select class="form-control" id="medicalCenter">-->
+          <!--            <option>1</option>-->
+          <!--            <option>2</option>-->
+          <!--          </select>-->
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+        <!--        <a href="http://localhost:4200/doctor">-->
+        <a (click)="navigateTo('/user')" style="cursor: pointer">
+          <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+        <a (click)="restartPassword()" style="cursor: pointer; margin-right: 2vw">
+          <button type="button" class="btn btn-success">Reiniciar contraseña</button>
+        </a>
+
+        <!--        <a href="http://localhost:4200/doctor/edit/{{doctor.id}}">-->
+        <a (click)="editarUsuario()" style="cursor: pointer">
+          <button type="button" class="btn btn-dark">Guardar</button>
+        </a>
+
+
+
+      </div>
+    </div>
+
+  </form>
+
+
+  </body>
+</main>

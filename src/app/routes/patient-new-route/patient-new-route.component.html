@@ -1,0 +1,268 @@
+<!--<p>patient-new-route works!</p>-->
+<!--<app-formulario-crear-paciente-->
+<!--  (informacionValidada)="crearPatient($event)">-->
+<!--</app-formulario-crear-paciente>-->
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+  <div class="containerC">
+    <h1 class="header-w__title">Registrar nuevo paciente</h1>
+    <br>
+  </div>
+
+
+  <form #formularioPatient="ngForm">
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="identificacion">Identificación</label>
+          <input class="form-control"
+                 title="Ingrese el número de identificación del paciente"
+                 id="identificacion"
+                 type="text"
+                 placeholder="Identificación"
+                 name="identificaction"
+                 [(ngModel)]="identification"
+                 required
+                 value="{{identification}}"
+                 minlength="5"
+                 maxlength="24"
+                 #identificationCampo = "ngModel"
+          >
+          <div *ngIf="identificationCampo.touched && identificationCampo.errors" style="color: red">
+            <p *ngIf="identificationCampo.errors.required">Campo requerido</p>
+            <p *ngIf="identificationCampo.errors.minlength">Longitud mínima 5</p>
+          </div>
+
+          <br>
+          <label for="Nombre">Nombre</label>
+          <input class="form-control"
+                 id="Nombre"
+                 title="Ingrese el nombre del paciente"
+                 type="text"
+                 placeholder="Nombre"
+                 name="nombre"
+                 [(ngModel)]="name"
+                 required
+                 minlength="2"
+                 maxlength="124"
+                 value="{{name}}"
+                 #nombreCampo="ngModel"
+          >
+          <div *ngIf="nombreCampo.touched && nombreCampo.errors" style="color: red">
+            <p *ngIf="nombreCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="nombreCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+          <br>
+          <label for="gender">Género</label>
+          <input class="form-control"
+                 id="gender"
+                 title="Ingrese el género del paciente"
+                 type="text"
+                 placeholder="Género"
+                 name="gender"
+                 [(ngModel)]="gender"
+                 value="{{gender}}"
+                 minlength="1"
+                 maxlength="44"
+                 #generoCampo = "ngModel"
+          >
+          <div *ngIf="generoCampo.touched && generoCampo.errors" style="color: red">
+            <p *ngIf="generoCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="generoCampo.errors.minlength"> Longitud mínima 1</p>
+          </div>
+
+
+          <br>
+          <label for="phone">Teléfono</label>
+          <input class="form-control"
+                 id="phone"
+                 title="Ingrese el número de teléfono del paciente"
+                 type="text"
+                 placeholder="Teléfono"
+                 name="phone"
+                 [(ngModel)]="phone"
+                 value="{{phone}}"
+                 maxlength="24"
+                 minlength="2"
+                 #phoneCampo="ngModel"
+          >
+          <div *ngIf="phoneCampo.touched && phoneCampo.errors" style="color: red">
+            <!--            <p *ngIf="phoneCampo.errors.required">Error: Campo requerido</p>-->
+            <p *ngIf="phoneCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+          <br>
+          <label for="date_of_birth">Fecha de nacimiento</label>
+          <input type="date" class="form-control"
+                 id="date_of_birth"
+                 title="Ingrese o seleccione la fecha de nacimiento del paciente"
+                 name="date_of_birth-start"
+                 placeholder="DD/MM/YYYY"
+                 [(ngModel)]="date_of_birth"
+                 value="{{date_of_birth}}"
+                 required
+                 maxlength="10"
+                 #birthDateCampo="ngModel"
+          >
+          <div *ngIf="birthDateCampo.touched && birthDateCampo.errors" style="color: red">
+            <p *ngIf="birthDateCampo.errors.required">Campo requerido</p>
+<!--            <p *ngIf="phoneCampo.errors.minlength">Error: Longitud mínima 2</p>-->
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="email">Correo electrónico</label>
+          <input type="email"
+                 title="Ingrese la dirección de correo electrónico del paciente"
+                 class="form-control"
+                 id="email"
+                 placeholder="name@example.com"
+                 name="email"
+                 [(ngModel)]="email"
+                 email
+                 maxlength="256"
+                 #emailCampo="ngModel"
+          >
+          <div *ngIf="emailCampo.touched && emailCampo.errors" style="color: red">
+            <p *ngIf="emailCampo.errors.required">Campo requerido</p>
+            <p *ngIf="emailCampo.invalid">Ingrese una dirección de correo válida</p>
+          </div>
+
+          <br>
+          <label for="occupation">Ocupación</label>
+          <input class="form-control"
+                 title="Ingrese la ocupación del paciente"
+                 id="occupation"
+                 type="text"
+                 placeholder="Ocupación"
+                 name="position"
+                 [(ngModel)]="occupation"
+                 value="{{occupation}}"
+                 maxlength="60"
+                 #occupationCampo="ngModel"
+          >
+
+
+          <br>
+          <label for="address">Dirección</label>
+          <input class="form-control"
+                 title="Ingrese la dirección del paciente"
+                 id="address"
+                 type="text"
+                 placeholder="Dirección"
+                 name="position"
+                 [(ngModel)]="address"
+                 value="{{address}}"
+                 maxlength="120"
+                 #addressCampo="ngModel"
+          >
+<!--          <div *ngIf="addressCampo.touched && addressCampo.errors" style="color: red">-->
+<!--            <p *ngIf="addressCampo.errors.required">Error: Campo requerido</p>-->
+<!--            <p *ngIf="addressCampo.errors.minlength">Error: Longitud mínima 2</p>-->
+<!--          </div>-->
+
+          <div *ngIf="this._authService.esSuperAdmin">
+              <br>
+              <label for="medicalCenter">Centro Médico</label>
+              <select title="Seleccione el centro médico al que corresponde el paciente"
+                      class="form-control" id="medicalCenter"
+                      name="medicalCenter" [(ngModel)]="medicalCenter"
+                      required #medicalCenterCampo="ngModel">
+                <option *ngFor="let medicalCenter of arrayOfMedicalCenters"
+                        value="{{medicalCenter.id}}">{{medicalCenter.name}}</option>
+              </select>
+            <div *ngIf="medicalCenterCampo.touched && medicalCenterCampo.errors" style="color: red">
+              <p *ngIf="medicalCenterCampo.errors.required">Campo requerido</p>
+              <!--              <p *ngIf="identificationCampo.errors.minlength">Error: Longitud mínima 5</p>-->
+            </div>
+          </div>
+
+
+          <!-- <div *ngIf="editando">-->
+          <!--          <br>-->
+          <!--          <label for="status">Estado</label>-->
+          <!--          <select class="form-control" id="status" name="status" [(ngModel)]="status" required>-->
+          <!--            <option value="true">Habilitado</option>-->
+          <!--            <option value="false">Deshabilitado</option>-->
+          <!--          </select>-->
+          <!-- </div>-->
+
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+        <!--        <a href="http://localhost:4200/patient">-->
+        <a title="Cancelar el registro y regresar a la pantalla de Pacientes" (click)="navigateTo('/patient')" style="cursor: pointer">
+          <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+        <button title="Guardar los datos y registrar al nuevo paciente" type="button" (click)="createPatient()" class="btn btn-dark" [disabled]="!formularioPatient.form.valid">Guardar</button>
+        <!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioPatient.form.valid">Guardar</button>-->
+
+      </div>
+    </div>
+
+  </form>
+
+  <br>
+
+  </body>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

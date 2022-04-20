@@ -1,0 +1,231 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Fuentes de Google Fonts -->
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!-- Fin Fuentes de Google Fonts -->
+
+<!-- Hack Para Desplegar el Menú activando un checkbox -->
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+  <div class="containerC">
+    <!--  <header class="header-w">-->
+    <!--    <section class="header-w__description">-->
+    <h1 class="header-w__title">Editar mi perfil</h1>
+    <br>
+    <!--        </section>-->
+    <!--  </header>-->
+  </div>
+
+
+  <form #formularioUser="ngForm">
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="Nombre" >Nombre</label>
+          <input class="form-control"
+                 id="Nombre"
+                 type="text"
+                 placeholder="Nombre"
+                 name="nombre"
+                 required
+                 minlength="2"
+                 maxlength="64"
+                 [(ngModel)]="name"
+                 #nameCampo="ngModel"
+          >
+          <div *ngIf="nameCampo.touched && nameCampo.errors" style="color: red">
+            <p *ngIf="nameCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="nameCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+
+          <br>
+          <label for="question1">Pregunta #1: (Gustos)</label>
+
+          <select id="question1" title="Seleccione la pregunta #1" class="form-control"
+                  name="question1" [(ngModel)]="question1" required #question1Campo="ngModel">
+            <option>Pendiente</option>
+            <option>¿Perros o gatos?</option>
+            <option>¿Ciudad o campo?</option>
+            <option>¿Bailar o cantar?</option>
+            <option>¿Playa o bosque?</option>
+            <option>¿Apartamento o casa?</option>
+          </select>
+          <div *ngIf="question1Campo.touched && question1Campo.errors" style="color: red">
+            <p *ngIf="question1Campo.errors.required"> Campo requerido</p>
+          </div>
+          <br>
+
+          <label for="question2">Pregunta #2: (Personal)</label>
+          <select id="question2" title="Seleccione la pregunta #2" class="form-control"
+                  name="question2" [(ngModel)]="question2" required #question2Campo="ngModel">
+            <option>Pendiente</option>
+            <option>¿Cuál es tu comida favorita?</option>
+            <option>¿Cuál superpoder tendrías?</option>
+            <option>¿Quién es tu ejemplo a seguir?</option>
+            <option>¿Cuál es tu país favorito?</option>
+            <option>¿Cuál es tu color favorito?</option>
+          </select>
+          <div *ngIf="question2Campo.touched && question2Campo.errors" style="color: red">
+            <p *ngIf="question2Campo.errors.required"> Campo requerido</p>
+          </div>
+
+          <br>
+          <label for="question3">Pregunta #3: (Informativa)</label>
+          <select id="question3" title="Seleccione la pregunta #3" class="form-control"
+                  name="question3" [(ngModel)]="question3" required #question3Campo="ngModel">
+            <option>Pendiente</option>
+            <option>¿En qué ciudad se conocieron tus padres?</option>
+            <option>¿En qué ciudad nació su abuelo materno?</option>
+            <option>¿Cuál es tu actor o actriz favorito?</option>
+            <option>¿Cuál es tu película o libro favorito?</option>
+            <option>¿En qué ciudad nació su abuelo paterno?</option>
+          </select>
+          <div *ngIf="question3Campo.touched && question3Campo.errors" style="color: red">
+            <p *ngIf="question3Campo.errors.required"> Campo requerido</p>
+          </div>
+
+          <br>
+
+          <label for="phone">Teléfono</label>
+          <input class="form-control"
+                 id="phone"
+                 type="text"
+                 placeholder="Teléfono"
+                 name="phone"
+                 required
+                 [(ngModel)]="phone"
+                 maxlength="22"
+                 #phoneCampo="ngModel"
+          >
+          <div *ngIf="phoneCampo.touched && phoneCampo.errors" style="color: red">
+            <p *ngIf="phoneCampo.errors.required"> Campo requerido</p>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div class="containerC">
+        <div class="form-group">
+
+
+          <div *ngIf="this._authService.esAdmin" >
+            <label for="email">Correo electrónico</label>
+            <input  class="form-control"
+                    id="email"
+                    type="email"
+                    placeholder="Correo electrónico"
+                    name="email"
+                    required
+                    [(ngModel)]="email"
+                    maxlength="124"
+                    #emailCampo="ngModel"
+            >
+            <div *ngIf="emailCampo.touched && emailCampo.errors" style="color: red">
+              <p *ngIf="emailCampo.errors.required"> Campo requerido</p>
+              <p *ngIf="emailCampo.invalid">Ingrese un correo válido</p>
+            </div>
+
+            <br>
+          </div>
+
+
+          <label for="answer1">Respuesta #1:</label>
+          <input  class="form-control"
+                  id="answer1"
+                  placeholder="Respuesta #1"
+                  name="answer1"
+                  required
+                  [(ngModel)]="answer1"
+                  #answer1Campo="ngModel"
+                  maxlength="64"
+          >
+
+
+          <br>
+          <label for="answer1">Respuesta #2:</label>
+          <input  class="form-control"
+                  id="answer2"
+                  placeholder="Respuesta #2"
+                  name="answer2"
+                  required
+                  [(ngModel)]="answer2"
+                  #answer2Campo="ngModel"
+                  maxlength="64"
+          >
+
+          <br>
+          <label for="answer3">Respuesta #3:</label>
+          <input  class="form-control"
+                  id="answer3"
+                  placeholder="Respuesta #3"
+                  name="answer3"
+                  required
+                  [(ngModel)]="answer3"
+                  #answer3Campo="ngModel"
+                  maxlength="64"
+          >
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+        <!--        <a href="http://localhost:4200/doctor">-->
+        <a (click)="navigateTo('/profile')" style="cursor: pointer">
+          <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+<!--        <a (click)="navigateTo('/profile')" style="cursor: pointer; margin-right: 2vw">-->
+<!--          <button type="button" class="btn btn-success">Reiniciar contraseña</button>-->
+<!--        </a>-->
+
+        <!--        <a href="http://localhost:4200/doctor/edit/{{doctor.id}}">-->
+        <a (click)="editarUsuario()" style="cursor: pointer" >
+          <button type="button" class="btn btn-dark" [disabled]="!formularioUser.form.valid">Guardar</button>
+        </a>
+
+        <a (click)="navigateTo('/profile/changepassword')" style="cursor: pointer; margin-left: 2vw" >
+          <button type="button" class="btn btn-success" >Cambiar constraseña</button>
+        </a>
+
+
+      </div>
+    </div>
+
+  </form>
+
+  <br>
+
+  </body>
+</main>

@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Fuentes de Google Fonts -->
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!-- Fin Fuentes de Google Fonts -->
+
+<!-- Hack Para Desplegar el Menú activando un checkbox -->
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+    <div class="containerR">
+    <div class="containerC" >
+      <h1 class="header-w__title">Personal</h1>
+    </div>
+
+  <div class="containerC" >
+    <div class="containerCbutton header-w__titlenofont" >
+
+        <a title="Registrar un nuevo miembro del personal" (click)="navigateTo('/doctor/new')"
+           style="cursor: pointer;margin-right: 30px">
+        <button  type="button" class="btn btn-dark" >Nuevo Personal</button>
+      </a>
+
+      <input type="input" class="form-control"
+             id="buscar"
+             title="Escriba lo que desea buscar. Si desea buscar por Centro médico solo escriba el número del código"
+             name="buscar"
+             placeholder="Buscar..."
+             required
+             [(ngModel)]="buscar"
+             (change)="printear()"
+             style="margin-right: 10px"
+      >
+      <a title="Presione aquí o la tecla ENTER para buscar" (click)="printear()" style="cursor: pointer">
+        <img src="assets/img/buscar.png" height="30" width="30" >
+      </a>
+
+    </div>
+  </div>
+
+</div>
+<br>
+
+<!--    &lt;!&ndash;-->
+<div class="padding">
+        <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Identificación</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Cargo</th>
+          <th *ngIf="this._authService.esSuperAdmin" scope="col">Centro Médico</th>
+          <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let doctor of arrayOfDoctores">
+          <th scope="row">PCM{{doctor.id}}</th>
+          <td>{{doctor.name}}</td>
+          <td>{{doctor.identification}}</td>
+          <td>{{doctor.email}}</td>
+          <td>{{doctor.phone}}</td>
+          <td>{{doctor.position}}</td>
+          <td *ngIf="this._authService.esSuperAdmin">
+            CM{{doctor.medicalCenter['id']}} {{doctor.medicalCenter['name']}}
+          </td>
+          <td>
+<!--            <a href="http://localhost:4200/doctor/view/{{doctor.id}}">-->
+<!--            <a (click)="navigateTo('/doctor/view/'+doctor.id)" style="cursor: pointer">-->
+<!--            <img src="assets/img/ver.png" height="22" width="22" style="margin-right: 10px">-->
+<!--            </a>-->
+
+<!--            <a href="http://localhost:4200/doctor/edit/{{doctor.id}}">-->
+            <a title="Editar la información de {{doctor.name}}" (click)="navigateTo('/doctor/edit/'+doctor.id)" style="cursor: pointer">
+              <img src="assets/img/dibujar.png" height="20" width="20" style="margin-right: 10px">
+            </a>
+
+<!--            <a href="http://localhost:4200/doctor">-->
+            <a title="Deshabilitar a {{doctor.name}}" (click)="deleteDoctor(doctor.id, doctor.name)" style="cursor: pointer">
+            <img src="assets/img/eliminar.png" height="20" width="20" >
+            </a>
+
+            </td>
+        </tr>
+
+        </tbody>
+      </table>
+</div>
+<!--    &ndash;&gt;-->
+
+
+  </body>
+</main>

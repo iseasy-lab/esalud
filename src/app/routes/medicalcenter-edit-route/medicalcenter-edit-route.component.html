@@ -1,0 +1,202 @@
+<!--<app-formulario-crear-doctor-->
+<!--(informacionValidada)="crearDoctor($event)"-->
+<!--&gt;-->
+<!--</app-formulario-crear-doctor>-->
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+  <div class="containerC">
+    <h1 class="header-w__title">Editar centro médico</h1>
+    <br>
+  </div>
+
+
+  <form #formularioMedicalCenter="ngForm">
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="name">Nombre</label>
+          <input class="form-control"
+                 title="Ingrese o modifique el nombre"
+                 id="name"
+                 type="text"
+                 placeholder="Nombre"
+                 name="name"
+                 [(ngModel)]="name"
+                 required
+                 value="{{name}}"
+                 minlength="2"
+                 maxlength="60"
+                 #nameCampo="ngModel"
+          >
+          <div *ngIf="nameCampo.touched && nameCampo.errors" style="color: red">
+            <p *ngIf="nameCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="nameCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+
+          <br>
+          <label for="address">Dirección</label>
+          <input class="form-control"
+                 title="Ingrese o modifique la dirección"
+                 id="address"
+                 type="text"
+                 placeholder="Dirección"
+                 name="address"
+                 [(ngModel)]="address"
+                 required
+                 maxlength="60"
+                 minlength="2"
+                 value="{{address}}"
+                 #addressCampo="ngModel"
+          >
+          <div *ngIf="addressCampo.touched && addressCampo.errors" style="color: red">
+            <p *ngIf="addressCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="addressCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+          <br>
+          <label for="contact">Contacto</label>
+          <input class="form-control"
+                 title="Ingrese o modifique la información de contacto"
+                 id="contact"
+                 type="text"
+                 placeholder="Contacto"
+                 name="contact"
+                 [(ngModel)]="contact"
+                 value="{{contact}}"
+                 maxlength="60"
+          >
+
+
+          <div *ngIf="this._authService.esSuperAdmin">
+          <br>
+          <label for="status">Estado</label>
+          <select class="form-control" id="status" name="status" [(ngModel)]="status" required
+                  title="Cambien el estado del centro médico"
+          >
+            <option value="true">Habilitado</option>
+            <option value="false">Deshabilitado</option>
+          </select>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="email">Correo electrónico</label>
+          <input type="email"
+                 title="Ingrese o modifique el correo electrónico"
+                 class="form-control"
+                 id="email"
+                 placeholder="name@example.com"
+                 name="email"
+                 [(ngModel)]="email"
+                 required
+                 email
+                 #emailCampo="ngModel"
+          >
+          <div *ngIf="emailCampo.touched && emailCampo.errors" style="color: red">
+            <p *ngIf="emailCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="emailCampo.invalid">Ingrese una dirección de correo válida</p>
+          </div>
+
+          <br>
+          <label for="phone">Teléfono</label>
+          <input class="form-control"
+                 title="Ingrese o modifique el número de teléfono"
+                 id="phone"
+                 type="text"
+                 placeholder="Teléfono"
+                 name="phone"
+                 [(ngModel)]="phone"
+                 value="{{phone}}"
+                 maxlength="22"
+                 minlength="2"
+                 #phoneCampo="ngModel"
+                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+          >
+          <div *ngIf="phoneCampo.touched && phoneCampo.errors" style="color: red">
+            <!--            <p *ngIf="phoneCampo.errors.required">Error: Campo requerido</p>-->
+            <p *ngIf="phoneCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+          <br>
+          <label for="cel">Celular</label>
+          <input class="form-control"
+                 title="Ingrese o modifique el número celular"
+                 id="cel"
+                 type="text"
+                 placeholder="Celular"
+                 name="password"
+                 [(ngModel)]="cel"
+                 minlength="5"
+                 maxlength="22"
+                 #celCampo="ngModel"
+                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+          >
+          <div *ngIf="celCampo.touched && celCampo.errors" style="color: red">
+            <!--            <p *ngIf="celCampo.errors.required">Error: Campo requerido</p>-->
+            <p *ngIf="celCampo.errors.minlength"> Longitud mínima 5</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+        <!--        <a href="http://localhost:4200/doctor">-->
+        <a (click)="navigateTo('/medicalCenter')" style="cursor: pointer">
+          <button title="Cancelar la creación y regresar" type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+        <!--        <button type="submit" class="btn btn-dark">Guardar</button>-->
+        <button title="Guardar la edición realizada" type="button" (click)="editMedicalCenter()" class="btn btn-dark" [disabled]="!formularioMedicalCenter.form.valid">Guardar</button>
+
+      </div>
+    </div>
+
+  </form>
+
+
+  </body>
+</main>
+

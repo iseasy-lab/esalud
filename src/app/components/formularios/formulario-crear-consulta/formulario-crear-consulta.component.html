@@ -1,0 +1,149 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div class="containerC">
+    <h1 *ngIf="mostrarFormularioInput" class="header-w__title">Editar consulta</h1>
+    <h1 *ngIf="!mostrarFormularioInput" class="header-w__title">Registrar consulta</h1>
+    <br>
+  </div>
+
+
+<!--  <form #formularioDoctor="ngForm" >-->
+  <form #formularioConsulta="ngForm" (ngSubmit)="createConsultation(formularioConsulta)">
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <div  *ngIf="!mostrarFormularioInput" >
+          <label for="doctor">Doctor</label>
+          <select class="form-control" id="doctor" name="doctor" [(ngModel)]="doctor" required #doctorCampo="ngModel">
+<!--            <option value="" selected disabled hidden>Choose here</option>-->
+<!--            <option value="{{doctor['id']}}" >{{doctor['name']}} - {{doctor['position']}}" </option>-->
+            <option *ngFor="let doctorAct of doctorsArray" value="{{doctorAct.id}}">{{doctorAct.name}} - {{doctorAct.position}}</option>
+          </select>
+            <div *ngIf="doctorCampo.touched && doctorCampo.errors" style="color: red">
+              <p *ngIf="doctorCampo.errors.required">Campo requerido</p>
+              <!--            <p *ngIf="phoneCampo.errors.minlength">Error: Longitud mínima 2</p>-->
+            </div>
+          </div>
+
+          <div  *ngIf="mostrarFormularioInput" >
+            <label for="date">Doctor</label>
+            <input type="text" class="form-control" value="{{doctor['name']}} - {{doctor['position']}}" disabled>
+          </div>
+
+          <br>
+          <label for="date">Fecha</label>
+          <input type="date" class="form-control"
+                 title="Seleccione la fecha para la consulta"
+                 id="date"
+                 name="date"
+                 placeholder="DD/MM/YYYY"
+                 [(ngModel)]="date"
+                 required
+                 #birthDateCampo="ngModel"
+          >
+          <div *ngIf="birthDateCampo.touched && birthDateCampo.errors" style="color: red">
+            <p *ngIf="birthDateCampo.errors.required">Campo requerido</p>
+            <!--            <p *ngIf="phoneCampo.errors.minlength">Error: Longitud mínima 2</p>-->
+          </div>
+
+          <br>
+          <label for="status">Estado</label>
+          <select title="Seleccione el estado para la consulta"  class="form-control" id="status" name="status" [(ngModel)]="status" required #statusCampo="ngModel">
+            <option value="Pendiente">Pendiente</option>
+            <option value="Finalizada">Finalizada</option>
+            <option value="Cancelada">Cancelada</option>
+          </select>
+          <div *ngIf="statusCampo.touched && statusCampo.errors" style="color: red">
+            <p *ngIf="statusCampo.errors.required"> Campo requerido</p>
+            <!--            <p *ngIf="phoneCampo.errors.minlength">Error: Longitud mínima 2</p>-->
+          </div>
+
+        </div>
+      </div>
+      <div class="containerC">
+        <div class="form-group">
+
+          <div  *ngIf="!mostrarFormularioInput" >
+          <label for="patient">Paciente</label>
+          <select class="form-control" id="patient" name="patient" [(ngModel)]="patient" required #patientCampo="ngModel">
+            <option *ngFor="let patient of patientsArray" value="{{patient.id}}">{{patient.name}} - {{patient.identification}}</option>
+          </select>
+            <div *ngIf="patientCampo.touched && patientCampo.errors" style="color: red">
+              <p *ngIf="patientCampo.errors.required">Campo requerido</p>
+              <!--            <p *ngIf="phoneCampo.errors.minlength">Error: Longitud mínima 2</p>-->
+            </div>
+          </div>
+
+
+          <div  *ngIf="mostrarFormularioInput" >
+            <label for="date">Paciente</label>
+            <input type="text" class="form-control" value="{{patient['name']}} - {{patient['identification']}}" disabled>
+          </div>
+
+          <br>
+          <label for="time">Hora</label>
+          <input title="Seleccione la hora para la consulta" class="form-control" type="time" id="time" [(ngModel)]="time" name="time"
+                 required #timeCampo="ngModel">
+          <!--                 min="06:00" max="18:00" -->
+          <div *ngIf="timeCampo.touched && timeCampo.errors" style="color: red">
+            <p *ngIf="timeCampo.errors.required"> Campo requerido</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div style="padding-left: 4vw; padding-right: 4vh">
+    <div class="containerR">
+      <label for="detail">Motivo de la consulta</label>
+    </div>
+    <div title="Escriba el motivo de la consulta" class="containerR">
+        <textarea  maxlength="240" class="form-control" id="detail" name="detail" [(ngModel)]="detail" rows="4" cols="50">
+        </textarea>
+    </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+    <div class="containerR">
+
+<!--      <a href="http://localhost:4200/consultation">-->
+      <a title="Cancelar los cambios y regresar a la bitácora de consultas" (click)="navigateTo('/consultation')" style="cursor: pointer">
+        <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+      </a>
+
+      <button title="Guardar los cambios realizados sobre la consulta" type="submit" class="btn btn-dark" [disabled]="!formularioConsulta.form.valid">Guardar</button>
+      <!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioDoctor.form.valid">Guardar</button>-->
+
+    </div>
+    </div>
+
+  </form>
+
+
+  </body>
+</main>

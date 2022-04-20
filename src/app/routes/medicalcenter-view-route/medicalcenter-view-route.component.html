@@ -1,0 +1,180 @@
+<!--<app-formulario-crear-doctor-->
+<!--(informacionValidada)="crearDoctor($event)"-->
+<!--&gt;-->
+<!--</app-formulario-crear-doctor>-->
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+  <div class="containerC">
+    <h1 class="header-w__title">Ver centro médico</h1>
+    <br>
+  </div>
+
+
+  <form #formularioDoctor="ngForm">
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="name">Nombre</label>
+          <input class="form-control"
+                 id="name"
+                 type="text"
+                 placeholder="Nombre"
+                 name="name"
+                 [(ngModel)]="name"
+                 required
+                 value="{{name}}"
+                 minlength="5"
+                 maxlength="24"
+                 disabled
+          >
+
+          <br>
+          <label for="address">Dirección</label>
+          <input class="form-control"
+                 id="address"
+                 type="text"
+                 placeholder="Dirección"
+                 name="address"
+                 [(ngModel)]="address"
+                 required
+                 minlength="2"
+                 value="{{address}}"
+                 #nombreCampo="ngModel"
+                 disabled
+          >
+          <div *ngIf="nombreCampo.touched && nombreCampo.errors" style="color: red">
+            <p *ngIf="nombreCampo.errors.required"> Campo requerido</p>
+            <p *ngIf="nombreCampo.errors.minlength"> Longitud mínima 2</p>
+          </div>
+
+          <br>
+          <label for="contact">Contacto</label>
+          <input class="form-control"
+                 id="contact"
+                 type="text"
+                 placeholder="Contacto"
+                 name="contact"
+                 [(ngModel)]="contact"
+                 value="{{contact}}"
+                 maxlength="24"
+                 disabled
+          >
+
+          <div *ngIf="this._authService.esSuperAdmin">
+          <br>
+          <label for="statusNoBoolean">Estado</label>
+          <input class="form-control"
+                 id="statusNoBoolean"
+                 type="text"
+                 placeholder="Estado"
+                 name="statusNoBoolean"
+                 [(ngModel)]="statusNoBoolean"
+                 value="{{statusNoBoolean}}"
+                 maxlength="24"
+                 disabled
+          >
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="email">Correo electrónico</label>
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 placeholder="name@example.com"
+                 name="email"
+                 [(ngModel)]="email"
+                 required
+                 email
+                 disabled
+          >
+
+          <br>
+          <label for="phone">Teléfono</label>
+          <input class="form-control"
+                 id="phone"
+                 type="text"
+                 placeholder="Teléfono"
+                 name="phone"
+                 [(ngModel)]="phone"
+                 value="{{phone}}"
+                 maxlength="32"
+                 disabled
+          >
+
+          <br>
+          <label for="cel">Celular</label>
+          <input class="form-control"
+                 id="cel"
+                 type="text"
+                 placeholder="Celular"
+                 name="password"
+                 [(ngModel)]="cel"
+                 minlength="5"
+                 disabled
+          >
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+        <!--        <a href="http://localhost:4200/doctor">-->
+        <a (click)="navigateTo('/medicalCenter')" style="cursor: pointer">
+          <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+        <!--        <button type="submit" class="btn btn-dark">Guardar</button>-->
+        <button type="button" (click)="navigateTo('medicalCenter/edit/'+medicalCenter.id)" class="btn btn-dark" >Editar</button>
+
+      </div>
+    </div>
+
+  </form>
+
+
+  </body>
+</main>
+

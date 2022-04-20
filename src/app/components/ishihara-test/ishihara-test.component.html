@@ -1,0 +1,135 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Fuentes de Google Fonts -->
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!-- Fin Fuentes de Google Fonts -->
+
+<!-- Hack Para Desplegar el Menú activando un checkbox -->
+<!--<input type="checkbox" class="checkbox" id="menu-toogle"/>-->
+<!--<label for="menu-toogle" class="menu-toogle"></label>-->
+<!--<nav class="navmio">-->
+<!--  <a href="/medicalCenter" class="navmio__item">Centro Médico</a>-->
+<!--  <a href="/doctor" class="navmio__item">Doctores</a>-->
+<!--  <a href="/patient" class="navmio__item">Pacientes</a>-->
+<!--  <a href="/consultation" class="navmio__item">Consultas</a>-->
+<!--  <a href="/imagesIshihara" class="navmio__item"> Ishihara</a>-->
+<!--  <a href="/user" class="navmio__item current">Usuarios</a>-->
+<!--  <a href="/#" class="navmio__item">Mi perfil</a>-->
+<!--  <a href="/login" class="navmio__item">Cerrar Sesión</a>-->
+<!--</nav>-->
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{this.name}}</div>
+  </div>
+
+
+  <div class="containerR">
+    <div class="containerC" >
+      <h1 class="header-w__title">Test de Ishihara</h1>
+    </div>
+
+  </div>
+  <br>
+  <div class="padding">
+    <div *ngFor="let image of arrayOfImages; let i = index">
+    <div class="containerR" >
+
+      <img src="http://192.168.100.13:1337/images/{{image.filename}}" alt="Imagen"
+           class="img-thumbnail"
+            style="height: 85vh">
+
+      <div class="containerC" style=" justify-content:center; align-content: stretch;">
+        <label  *ngIf="!calificar" for="result{{image.id}}">Ingrese su respuesta</label>
+        <label  *ngIf="calificar" for="result{{image.id}}">Respuesta ingresada</label>
+        <input type="text" class="form-control"
+               id="result{{image.id}}"
+               name="result{{image.id}}"
+               placeholder="Ingrese su respuesta"
+               [disabled]="testTerminado"
+               required>
+
+        <br>
+
+        <label *ngIf="calificar" for="real_result{{image.id}}" >Respuesta correcta</label>
+        <input *ngIf="calificar" type="text" class="form-control"
+               id="real_result{{image.id}}"
+               name="real_result{{image.id}}"
+               placeholder="Respuesta correcta"
+               value="{{image.real_result}}"
+               disabled>
+
+        <br>
+
+        <div *ngIf="calificar">
+        <fieldset id="group{{image.id}}">
+          <input type="radio" value="true" id="flexRadioDefault{{image.id}}Hit" name="group{{image.id}}" [(ngModel)]="arrayOfCalificaciones[i]">
+          <label class="form-check-label" for="flexRadioDefault{{image.id}}Hit" style="font-size: 24px">
+            Correcto
+          </label>
+          <br>
+          <input type="radio" value="false" id="flexRadioDefault{{image.id}}Miss" name="group{{image.id}}" [(ngModel)]="arrayOfCalificaciones[i]">
+          <label class="form-check-label" for="flexRadioDefault{{image.id}}Miss" style="font-size: 24px">
+            Incorrecto
+          </label>
+        </fieldset>
+        </div>
+
+        <br>
+<!--        <h1>Agregar la conclusion aqui</h1>-->
+
+      </div>
+
+    </div>
+      <br>
+
+    </div>
+  </div>
+
+  <br *ngIf="comentar">
+  <hr *ngIf="comentar">
+  <div *ngIf="comentar" style="padding-left: 4vw; padding-right: 1vw">
+    <div class="containerR">
+      <label for="conclusion">Conclusión</label>
+    </div>
+    <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Escriba aquí las conclusiones de la prueba."
+                  id="conclusion" name="conclusion"  rows="5" cols="50" value="{{conclusion}}"
+                  [(ngModel)]="conclusion">
+        </textarea>
+    </div>
+  </div>
+
+
+  <br>
+  <hr>
+  <div class="containerC">
+    <div class="containerR">
+
+<!--      <a href="http://localhost:4200/tests/{{idMedicalRecord}}">-->
+        <a (click)="navigateTo('/tests/'+idMedicalRecord)" style="cursor: pointer">
+        <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+      </a>
+
+<!--      <a href="http://localhost:4200/test/">-->
+        <button *ngIf="calificar==false && comentar==false" type="button" (click)="terminarTest()" class="btn btn-dark">Terminar Test</button>
+      <button *ngIf="calificar==true && comentar==false" type="button" (click)="irACalificar()" class="btn btn-success">Terminar Calificación</button>
+      <button *ngIf="comentar" type="button" (click)="subirTest()" class="btn btn-dark">Guardar</button>
+<!--      </a>-->
+      <!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioPatient.form.valid">Guardar</button>-->
+
+    </div>
+  </div>
+
+  <br>
+
+  </body>
+
+</main>

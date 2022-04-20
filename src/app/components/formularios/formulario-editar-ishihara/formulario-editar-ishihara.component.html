@@ -1,0 +1,128 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div class="containerC">
+    <!--    <h1 *ngIf="mostrarFormularioInput" class="header-w__title">Editar paciente</h1>-->
+    <!--    <h1 *ngIf="!mostrarFormularioInput" class="header-w__title">Nuevo paciente</h1>-->
+    <h1  class="header-w__title">Editar imagen</h1>
+    <br>
+  </div>
+
+
+    <form #formularioIshihara="ngForm" >
+  <div class="containerR">
+    <div class="containerC" >
+      <div class="form-group">
+
+        <label for="reference_color">Color de la referencia</label>
+        <input class="form-control"
+               title="Modifique el color de referencia presente en la imagen"
+               id="reference_color"
+               type="text"
+               placeholder="Inserte los colores con los que se relaciona la imagen"
+               name="reference_color"
+               [(ngModel)]="reference_color"
+               required
+               maxlength="124"
+               #colorReferenciaCampo="ngModel"
+        >
+        <div *ngIf="colorReferenciaCampo.touched && colorReferenciaCampo.errors" style="color: red">
+          <p *ngIf="colorReferenciaCampo.errors.required"> Campo requerido</p>
+          <!--            <p *ngIf="phoneCampo.errors.minlength">Error: Longitud mínima 2</p>-->
+        </div>
+
+        <br>
+        <label for="real_result">Resultado esperado</label>
+        <input class="form-control"
+               title="Modifique el resultado esperado"
+               id="real_result"
+               type="text"
+               placeholder="Ingrese el valor esperado para la imagen"
+               name="real_result"
+               required
+               [(ngModel)]="real_result"
+               minlength="2"
+               maxlength="60"
+               #realResultCampo="ngModel"
+        >
+        <div *ngIf="realResultCampo.touched && realResultCampo.errors" style="color: red">
+          <p *ngIf="realResultCampo.errors.required"> Campo requerido</p>
+          <p *ngIf="realResultCampo.errors.minlength"> Longitud mínima 2</p>
+        </div>
+
+
+<!--        <br>-->
+<!--        <label for="file_path">Seleccione una imagen</label>-->
+<!--        <input (change)="capturarFile($event)" class="form-control" type="file" id="file_path" name="file_path" accept="image/png, image/jpeg">-->
+
+
+        <br>
+        <label for="status">Estado</label>
+        <select title="Cambie el estado de la imagen dentro del sistema" class="form-control" id="status" name="status" [(ngModel)]="status" required #statusCampo="ngModel">
+          <option value="true">Habilitado</option>
+          <option value="false">Deshabilitado</option>
+        </select>
+        <div *ngIf="statusCampo.touched && statusCampo.errors" style="color: red">
+          <p *ngIf="statusCampo.errors.required"> Campo requerido</p>
+          <!--            <p *ngIf="phoneCampo.errors.minlength">Error: Longitud mínima 2</p>-->
+        </div>
+        <br>
+
+      </div>
+
+    </div>
+    <div class="containerC" style="align-items: center; justify-content:center; align-content: stretch;">
+      <div class="form-group">
+
+        <div>
+          <img src="http://192.168.100.13:1337/{{imageIshihara.path}}" alt="" style="height: 50vh">
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+  <div class="containerC">
+    <div class="containerR">
+
+<!--      <a href="http://localhost:4200/patient">-->
+        <a title="Cancelar las modificaciones realizadas" (click)="navigateTo('/imagesIshihara')" style="cursor: pointer">
+        <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+      </a>
+
+      <button title="Guardar las modificaciones realizadas" type="button" (click)="editarDatosImagen()" class="btn btn-dark" [disabled]="!formularioIshihara.form.valid">Guardar</button>
+      <!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioPatient.form.valid">Guardar</button>-->
+
+    </div>
+  </div>
+
+    </form>
+
+
+  </body>
+</main>
+

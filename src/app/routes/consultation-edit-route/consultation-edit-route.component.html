@@ -1,0 +1,13 @@
+<div *ngIf="mostrarFormulario">
+<app-formulario-crear-consulta
+[dateInput]="consultation.date"
+[timeInput]="consultation.time"
+[detailInput]="consultation.detail"
+[statusInput]="consultation.status"
+[doctorInput]="consultation.doctor"
+[patientInput]="consultation.patient"
+[mostrarFormularioInput]="mostrarFormulario"
+(informacionValidada)="editConsultation($event)"
+>
+</app-formulario-crear-consulta>
+</div>

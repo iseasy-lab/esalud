@@ -1,0 +1,34 @@
+<!--<p>medical-record-edit-route works!</p>-->
+<div *ngIf="mostrarFormulario">
+  <app-formulario-crear-medicalrecord
+  [reasonInput]="medicalRecord.reason"
+  [dateInput]="medicalRecord.date"
+  [ageInput]="medicalRecord.age"
+  [lensometryREInput]="medicalRecord.lensometryRE"
+  [lensometryLEInput]="medicalRecord.lensometryLE"
+  [avREInput]="medicalRecord.avRE"
+  [avLEInput]="medicalRecord.avLE"
+  [sphereREInput]="medicalRecord.sphereRE"
+  [sphereLEInput]="medicalRecord.sphereLE"
+  [cylinderREInput]="medicalRecord.cylinderRE"
+  [cylinderLEInput]="medicalRecord.cylinderLE"
+  [axisREInput]="medicalRecord.axisRE"
+  [axisLEInput]="medicalRecord.axisLE"
+  [prismREInput]="medicalRecord.prismRE"
+  [prismLEInput]="medicalRecord.prismLE"
+  [avREFinalInput]="medicalRecord.avREFinal"
+  [avLEFinalInput]="medicalRecord.avLEFinal"
+  [ADDInput]="medicalRecord.ADD"
+  [DPInput]="medicalRecord.DP"
+  [ALTInput]="medicalRecord.ALT"
+  [remarkInput]="medicalRecord.remark"
+  [indicationsInput]="medicalRecord.indications"
+  [lunaTipoInput]="medicalRecord.lunaTipo"
+  [mostrarFormularioInput]="mostrarFormulario"
+  (informacionValidada)="editMedicalRecord($event)"
+  >
+  </app-formulario-crear-medicalrecord>
+
+</div>
+
+<!--patient:number-->

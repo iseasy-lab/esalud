@@ -1,0 +1,715 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+  <div class="containerR">
+    <div class="containerC" style="width: 150vw;">
+      <h1 class="header-w__title">Visualizando registro - Historia Clínica Optométrica</h1>
+
+    </div>
+    <div class="containerC" >
+    </div>
+
+
+  </div>
+
+
+    <hr>
+    <h5 class="header-w__title" style="margin-left: 2vw; font-size: 26px">Datos del paciente</h5>
+
+    <br>
+    <div class="containerR">
+      <div class="containerC">
+        <div class="form-group">
+
+          <label for="Nombre" >Nombre</label>
+          <input class="form-control"
+                 id="Nombre"
+                 type="text"
+                 placeholder="Nombre"
+                 name="nombre"
+                 required
+                 minlength="2"
+                 value="{{medicalRecord.patient.name}}"
+                 disabled
+          >
+
+          <br>
+          <label for="phone" >Teléfono</label>
+          <input class="form-control"
+                 id="phone"
+                 type="text"
+                 placeholder="Teléfono"
+                 name="phone"
+                 value="{{medicalRecord.patient.phone}}"
+                 maxlength="24"
+                 disabled
+          >
+
+          <br>
+          <label for="occupation" >Ocupación</label>
+          <input class="form-control"
+                 id="occupation"
+                 type="text"
+                 placeholder="Ocupación"
+                 name="position"
+                 value="{{medicalRecord.patient.occupation}}"
+                 maxlength="32"
+                 disabled
+          >
+
+
+          <br>
+          <label for="date_of_birth" >Fecha de nacimiento</label>
+          <input type="date" class="form-control"
+                 id="date_of_birth"
+                 name="date_of_birth-start"
+                 placeholder="DD/MM/YYYY"
+                 disabled
+                 value="{{medicalRecord.patient.date_of_birth}}"
+          >
+          <!--                 min="2018-01-01" max="2018-12-31"-->
+
+
+
+        </div>
+      </div>
+
+      <div class="containerC">
+        <div class="form-group">
+
+
+          <label for="identificacion" >Identificación</label>
+          <input class="form-control"
+                 id="identificacion"
+                 type="text"
+                 placeholder="Identificación"
+                 name="identificaction"
+                 required
+                 value="{{medicalRecord.patient.identification}}"
+                 minlength="5"
+                 maxlength="24"
+                 disabled
+          >
+          <br>
+
+          <label for="email" >Correo electrónico</label>
+          <input type="email"
+                 class="form-control"
+                 id="email"
+                 placeholder="name@example.com"
+                 name="email"
+                 email
+                 value="{{medicalRecord.patient.email}}"
+                 disabled
+          >
+
+
+
+          <br>
+          <label for="address" >Dirección</label>
+          <input class="form-control"
+                 id="address"
+                 type="text"
+                 placeholder="Dirección"
+                 name="position"
+                 value="{{medicalRecord.patient.address}}"
+                 maxlength="32"
+                 disabled
+          >
+
+
+          <br>
+          <div class="containerR">
+            <div class="containerC" style="padding-left: 0vh">
+              <label for="age" >Edad</label>
+              <input class="form-control"
+                     id="age"
+                     type="text"
+                     placeholder="Edad"
+                     name="age"
+                     value="{{medicalRecord.age}}"
+                     maxlength="24"
+                     disabled
+              >
+            </div>
+            <div class="containerC">
+              <label for="gender" >Género</label>
+              <input class="form-control"
+                     id="gender"
+                     type="text"
+                     placeholder="Género"
+                     name="gender"
+                     value="{{medicalRecord.patient.gender}}"
+                     maxlength="24"
+                     disabled
+              >
+            </div>
+
+          </div>
+          <!--          <div >-->
+          <!--            <br>-->
+          <!--            <label for="medicalCenter">Centro Médico</label>-->
+          <!--            <select class="form-control" id="medicalCenter" name="medicalCenter"  required>-->
+          <!--              <option *ngFor="let medicalCenter of arrayOfMedicalCenters"-->
+          <!--                      value="{{medicalCenter.id}}">{{medicalCenter.name}}</option>-->
+          <!--            </select>-->
+          <!--          </div>-->
+
+
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <div class="containerC">
+      <div class="containerR">
+
+        <!--        <a href="http://localhost:4200/medicalRecord/patient/{{patient.id}}">-->
+        <!--          <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>-->
+        <!--        </a>-->
+
+<!--        <a href="http://localhost:4200/patient/edit/{{medicalRecord.patient.id}}" target="_blank">-->
+          <a (click)="navigateTo('/patient/edit/'+medicalRecord.patient.id)" style="cursor: pointer">
+          <button type="button" class="btn btn-dark">Editar datos del paciente</button>
+        </a>
+        <!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioPatient.form.valid">Guardar</button>-->
+
+      </div>
+    </div>
+
+    <br>
+
+
+    <hr>
+
+    <h5  class="header-w__title" style="font-size: 36px; padding-left: 4vw">
+      Fecha: {{medicalRecord.date}}
+    </h5>
+
+
+    <br>
+    <div style="padding-left: 4vw; padding-right: 1vw">
+      <div class="containerR">
+        <label for="reason">Motivo de la consulta</label>
+      </div>
+      <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Escriba aquí los sintomas o motivos por los que el paciente solicitó y asistió a la consulta"
+                  id="reason" rows="4" cols="50" required value="{{medicalRecord.reason}}" disabled>
+        </textarea>
+      </div>
+    </div>
+
+    <br>
+    <hr>
+    <h5 class="header-w__title" style="font-size: 36px; padding-left: 4vw">Rx</h5>
+
+    <div class="containerR">
+
+      <div class="containerC">
+        <div class="form-group">
+          <h5 class="header-w__title" style="font-size: 26px">Lensometría</h5>
+          <br>
+          <label for="lensometryLE" >Ojo Izquierdo</label>
+          <input class="form-control"
+                 id="lensometryLE"
+                 type="text"
+                 name="lensometryLE"
+                 placeholder="Lensometría OI"
+                 value="{{medicalRecord.lensometryLE}}"
+                 maxlength="10" disabled
+          >
+          <br>
+          <label for="lensometryRE" >Ojo Derecho</label>
+          <input class="form-control"
+                 id="lensometryRE"
+                 type="text"
+                 placeholder="Lensometría OD"
+                 name="lensometryRE"
+                 disabled
+                 value="{{medicalRecord.lensometryRE}}"
+                 maxlength="24"
+
+          >
+        </div>
+      </div>
+
+      <div class="containerC">
+        <div class="form-group">
+          <h5 class="header-w__title" style="font-size: 26px">Agudeza Visual (AV)</h5>
+          <br>
+          <label for="avLE" >Ojo Izquierdo</label>
+          <input class="form-control"
+                 id="avLE"
+                 type="text"
+                 name="avLE"
+                 disabled
+                 placeholder="AV OI"
+                 value="{{medicalRecord.avLE}}"
+                 maxlength="24"
+
+          >
+          <br>
+          <label for="avRE" >Ojo Derecho</label>
+          <input class="form-control"
+                 id="avRE"
+                 type="text"
+                 placeholder="AV OD"
+                 name="avRE"
+                 value="{{medicalRecord.avRE}}"
+                 maxlength="24"
+                 disabled
+          >
+        </div>
+      </div>
+
+    </div>
+
+
+    <hr>
+    <h5 class="header-w__title" style="font-size: 36px; padding-left: 4vw">Rx Final</h5>
+
+    <div class="containerR" style="padding-right: 1vw">
+
+      <!-- Esfera   -->
+      <div class="containerC">
+        <div class="form-group">
+          <h5 class="header-w__title" style="font-size: 26px">Esfera</h5>
+          <br>
+          <label for="sphereLE" >Ojo Izquierdo</label>
+          <input class="form-control"
+                 id="sphereLE"
+                 type="text"
+                 placeholder="Esfera OI"
+                 name="sphereLE"
+                 value="{{medicalRecord.sphereLE}}"
+                 maxlength="10" disabled
+          >
+          <br>
+          <label for="sphereRE" >Ojo Derecho</label>
+          <input class="form-control"
+                 id="sphereRE"
+                 type="text"
+                 placeholder="Esfera OD"
+                 name="sphereRE"
+                 value="{{medicalRecord.sphereRE}}"
+                 maxlength="10"
+                 disabled
+          >
+        </div>
+      </div>
+
+      <!-- Cilindro   -->
+      <div class="containerC">
+        <div class="form-group">
+          <h5 class="header-w__title" style="font-size: 26px">Cilindro</h5>
+          <br>
+          <label for="cylinderLE" >Ojo Izquierdo</label>
+          <input class="form-control"
+                 id="cylinderLE"
+                 type="text"
+                 placeholder="Cilindro OI"
+                 name="cylinderLE"
+                 value="{{medicalRecord.cylinderLE}}"
+                 maxlength="24"
+                 disabled
+          >
+          <br>
+          <label for="cylinderRE" >Ojo Derecho</label>
+          <input class="form-control"
+                 id="cylinderRE"
+                 type="text"
+                 placeholder="Cilindro OD"
+                 name="cylinderRE"
+                 value="{{medicalRecord.cylinderRE}}"
+                 maxlength="24"
+                 disabled
+          >
+        </div>
+      </div>
+
+      <!-- Eje   -->
+      <div class="containerC">
+        <div class="form-group">
+          <h5 class="header-w__title" style="font-size: 26px">Eje</h5>
+          <br>
+          <label for="axisLE" >Ojo Izquierdo</label>
+          <input class="form-control"
+                 id="axisLE"
+                 type="text"
+                 name="axisLE"
+                 placeholder="Eje OI"
+                 value="{{medicalRecord.axisLE}}"
+                 maxlength="24"
+                 disabled
+          >
+          <br>
+          <label for="axisRE" >Ojo Derecho</label>
+          <input class="form-control"
+                 id="axisRE"
+                 type="text"
+                 placeholder="Eje OD"
+                 name="axisRE"
+                 value="{{medicalRecord.axisRE}}"
+                 maxlength="24"
+                 disabled
+          >
+        </div>
+      </div>
+
+      <!-- Prisma   -->
+      <div class="containerC">
+        <div class="form-group">
+          <h5 class="header-w__title" style="font-size: 26px">Prisma</h5>
+          <br>
+          <label for="prismLE" >Ojo Izquierdo</label>
+          <input class="form-control"
+                 id="prismLE"
+                 type="text"
+                 placeholder="Prisma OI"
+                 name="prismRE"
+                 value="{{medicalRecord.prismLE}}"
+                 maxlength="24"
+                 disabled
+          >
+          <br>
+          <label for="prismRE" >Ojo Derecho</label>
+          <input class="form-control"
+                 id="prismRE"
+                 type="text"
+                 placeholder="Prisma OD"
+                 name="prismRE"
+                 value="{{medicalRecord.prismRE}}"
+                 maxlength="24"
+                 disabled
+          >
+        </div>
+      </div>
+
+      <!-- AV   -->
+      <div class="containerC">
+        <div class="form-group">
+          <h5 class="header-w__title" style="font-size: 26px">AV</h5>
+          <br>
+          <label for="avLEFinal" >Ojo Izquierdo</label>
+          <input class="form-control"
+                 id="avLEFinal"
+                 type="text"
+                 placeholder="AV OI Rx Final"
+                 value="{{medicalRecord.avLEFinal}}"
+                 name="avLEFinal"
+                 maxlength="24"
+                 disabled
+          >
+          <br>
+          <label for="avREFinal" >Ojo Derecho</label>
+          <input class="form-control"
+                 id="avREFinal"
+                 type="text"
+                 placeholder="AV OD Rx Final"
+                 name="avREFinal"
+                 value="{{medicalRecord.avREFinal}}"
+                 maxlength="24"
+                 disabled
+          >
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="containerR" style="padding-right: 1vw">
+
+      <!-- ADD   -->
+      <div class="containerC">
+        <div class="form-group">
+          <!--        <h5 class="header-w__title" style="font-size: 26px">ADD</h5>-->
+          <br>
+          <label for="ADD" >ADD</label>
+          <input class="form-control"
+                 id="ADD"
+                 type="text"
+                 placeholder="ADD"
+                 name="ADD"
+                 value="{{medicalRecord.ADD}}"
+                 maxlength="24"
+                 disabled
+          >
+        </div>
+      </div>
+
+      <!-- DP   -->
+      <div class="containerC">
+        <div class="form-group">
+          <!--        <h5 class="header-w__title" style="font-size: 26px">DP</h5>-->
+          <br>
+          <label for="DP" >DP</label>
+          <input class="form-control"
+                 id="DP"
+                 type="text"
+                 placeholder="DP"
+                 name="DP"
+                 value="{{medicalRecord.DP}}"
+                 maxlength="24"
+                 disabled
+          >
+
+        </div>
+      </div>
+
+      <!-- ALT   -->
+      <div class="containerC">
+        <div class="form-group">
+          <!--        <h5 class="header-w__title" style="font-size: 26px">ALT</h5>-->
+          <br>
+          <label for="ALT" >ALT</label>
+          <input class="form-control"
+                 id="ALT"
+                 type="text"
+                 placeholder="ALT"
+                 name="ALT"
+                 value="{{medicalRecord.ALT}}"
+                 maxlength="24"
+                 disabled
+          >
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <hr>
+
+    <div style="padding-left: 4vw; padding-right: 1vw">
+      <div class="containerR">
+        <label for="remark">Observación</label>
+      </div>
+      <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Escriba aquí las observaciones generadas durante la consulta."
+                  id="remark" name="remark" rows="2" cols="50" value="{{medicalRecord.remark}}" disabled>
+        </textarea>
+      </div>
+    </div>
+
+    <hr>
+    <div style="padding-left: 4vw; padding-right: 1vw">
+      <div class="containerR">
+        <label for="indications">Indicación</label>
+      </div>
+      <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Escriba aquí las indicaciones dadas al paciente."
+                  id="indications" name="indications"  rows="2" cols="50" value="{{medicalRecord.indications}}" disabled>
+        </textarea>
+      </div>
+    </div>
+
+    <hr>
+
+  <div class="containerC">
+    <div class="form-group">
+      <!--        <h5 class="header-w__title" style="font-size: 26px">DP</h5>-->
+      <br>
+      <label for="lunaTipo" >Tipo de luna</label>
+      <input class="form-control"
+             id="lunaTipo"
+             type="text"
+             placeholder="Tipo de luna"
+             name="lunaTipo"
+             value="{{medicalRecord.lunaTipo}}"
+             maxlength="24"
+             disabled
+      >
+
+    </div>
+
+
+
+
+
+  </div>
+
+<!-- tests de ishihara-->
+  <div *ngFor="let testIshihara of medicalRecord.testIshihara.slice().reverse()">
+  <hr>
+
+    <h5  class="header-w__title" style="font-size: 30px; padding-left: 4vw">
+      Test de Ishihara: {{testIshihara['date']}}
+    </h5>
+
+    <div class="containerR" style="padding-right: 1vw">
+
+    <div class="containerC">
+      <div class="form-group">
+        <!--        <h5 class="header-w__title" style="font-size: 26px">ADD</h5>-->
+        <br>
+        <label for="hits" >Aciertos</label>
+        <input class="form-control"
+               id="hits"
+               type="text"
+               placeholder="v"
+               name="hits"
+               value="{{testIshihara['hits']}}"
+               maxlength="24"
+               disabled
+        >
+      </div>
+    </div>
+
+    <div class="containerC">
+      <div class="form-group">
+        <!--        <h5 class="header-w__title" style="font-size: 26px">DP</h5>-->
+        <br>
+        <label for="misses" >Desaciertos</label>
+        <input class="form-control"
+               id="misses"
+               type="text"
+               placeholder="misses"
+               name="DP"
+               value="{{testIshihara['misses']}}"
+               maxlength="24"
+               disabled
+        >
+
+      </div>
+    </div>
+
+
+  </div>
+    <div style="padding-left: 4vw; padding-right: 1vw">
+      <div class="containerR">
+        <label for="conclusion">Conclusiones</label>
+      </div>
+      <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Conclusiones."
+                  id="conclusion" name="conclusion"  rows="4" cols="50" value="{{testIshihara['conclusion']}}" disabled>
+        </textarea>
+      </div>
+    </div>
+
+  </div>
+  <!-- tests de ishihara-->
+
+
+  <!-- test FM100 -->
+  <div *ngFor="let testFM of medicalRecord.testFarnsworthMunsell.slice().reverse()">
+    <hr>
+
+    <h5  class="header-w__title" style="font-size: 30px; padding-left: 4vw">
+      Test de Farnsworth-Munsell: {{testFM['date']}}
+    </h5>
+    <br>
+    <div style="padding-left: 4vw; padding-right: 1vw">
+      <div class="containerR">
+        <label for="conclusionTF">Conclusiones</label>
+      </div>
+      <div class="containerR">
+        <textarea class="form-control"
+                  placeholder="Conclusiones."
+                  id="conclusionTF" name="conclusionTF"  rows="6" cols="50" value="{{testFM['conclusion']}}" disabled>
+        </textarea>
+      </div>
+    </div>
+
+<!--abre escala-->
+    <br>
+    <div class="containerR" style="flex-direction: row; justify-content: center" >
+      <!--      <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" >-->
+      <div *ngFor="let element of scale; let i=index" >
+
+        <div *ngIf="testFM['score'][i]==0" class="example-box4"  >  </div>
+        <div *ngIf="testFM['score'][i]>0 && testFM['score'][i]<5" class="example-box5" >  </div>
+        <div *ngIf="testFM['score'][i]>=5" class="example-box3" >  </div>
+
+      </div>
+      <!--       </div>-->
+    </div>
+
+    <div class="containerR" style="flex-direction: row; justify-content: center" >
+      <!--      <div cdkDropList cdkDropListOrientation="horizontal" class="example-list" >-->
+
+      <div *ngFor="let element of scale" >
+        <div  class="example-box2" [ngStyle]="{ background: element.color }">  </div>
+      </div>
+      <!--       </div>-->
+    </div>
+<!--cierre escala-->
+
+
+  </div>
+  <!-- test FM100 -->
+
+  <br>
+    <hr>
+    <br>
+
+
+    <div class="containerC">
+      <div class="containerR">
+
+<!--        <a href="http://localhost:4200/medicalRecord/patient/{{medicalRecord.patient.id}}">-->
+          <a (click)="navigateTo('/medicalRecord/patient/'+medicalRecord.patient.id)" style="cursor: pointer">
+          <button type="button" class="btn btn-danger" style="margin-right: 2vw">Cancelar</button>
+        </a>
+
+<!--        <a href="http://localhost:4200/medicalRecord/patient/{{medicalRecord.patient.id}}/edit/{{medicalRecord.id}}">-->
+<!--          <a (click)="navigateTo('/medicalRecord/patient/'+medicalRecord.patient.id)" style="cursor: pointer">-->
+            <a (click)="navigateTo('/medicalRecord/patient/'+medicalRecord.patient.id+'/edit/'+medicalRecord.id)" style="cursor: pointer">
+
+            <button type="button" class="btn btn-dark" style="margin-right: 2vw; min-width: 7vw">Editar</button>
+        </a>
+
+<!--        <a href="http://localhost:4200/tests/{{medicalRecord.id}}">-->
+          <a (click)="navigateTo('/tests/'+medicalRecord.id)" style="cursor: pointer">
+          <button type="button" class="btn btn-success" style="margin-right: 2vw; min-width: 7vw">Tests</button>
+        </a>
+
+<!--        <div>-->
+<!--          <button class="btn btn-warning" (click)="downloadPDF()">Descargar PDF</button>-->
+<!--        </div>-->
+
+<!--        <button type="submit" class="btn btn-dark" [disabled]="!formularioMedicalRecord.form.valid">Guardar</button>-->
+
+      </div>
+    </div>
+    <br>
+    <br>
+
+
+
+  </body>
+</main>
+

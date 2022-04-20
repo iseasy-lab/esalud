@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Fuentes de Google Fonts -->
+<link href="//fonts.googleapis.com/css?family=Lobster:400" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<!-- Fin Fuentes de Google Fonts -->
+
+<!-- Hack Para Desplegar el Menú activando un checkbox -->
+<input type="checkbox" class="checkbox" id="menu-toogle"/>
+<label for="menu-toogle" class="menu-toogle"></label>
+<nav class="navmio">
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/medicalCenter')"  class="navmio__item" style="color: white; cursor: pointer">Centro Médico</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/doctor')" class="navmio__item" style="color: white; cursor: pointer">Personal</a>
+  <a (click)="navigateTo('/patient')" class="navmio__item" style="color: white; cursor: pointer">Pacientes</a>
+  <a (click)="navigateTo('/consultationRecordatorio')" class="navmio__item" style="color: white; cursor: pointer">Recordatorio de Consultas</a>
+<a (click)="navigateTo('/consultation')" class="navmio__item" style="color: white; cursor: pointer">Bitácora de Consultas</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/imagesIshihara')" class="navmio__item" style="color: white; cursor: pointer"> Ishihara</a>
+  <a *ngIf="this._authService.esAdmin" (click)="navigateTo('/user')" class="navmio__item current" style="color: white; cursor: pointer">Usuarios</a>
+  <a (click)="navigateTo('/profile')" class="navmio__item " style="color: white; cursor: pointer">Mi perfil</a>
+  <a (click)="navigateTo('/login')" class="navmio__item" style="color: white; cursor: pointer">Cerrar Sesión</a>
+</nav>
+
+<main class="main-w">
+  <body>
+
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <div style="justify-content: flex-end; padding-right: 20px;
+  padding-top: 5px;  font-family:Lobster; font-size: 20px">
+      <img src="assets/img/user.png" alt="" height="20">
+      {{_authService.userName}}</div>
+  </div>
+
+
+  <div class="containerR">
+    <div class="containerC">
+      <h1 class="header-w__title">Seleccione la prueba que desea aplicar</h1>
+    </div>
+
+
+    <div class="containerC">
+      <div class="containerCbutton header-w__titlenofont">
+        <!--  <div class="containerR header-w__titlenofont">-->
+        <!--        <a href="http://localhost:4200/patient/new">-->
+        <!--          <button  type="button" class="btn btn-dark" style="width: 10vw">Nuevo</button>-->
+        <!--        </a>-->
+        <!--  </div>-->
+      </div>
+    </div>
+
+  </div>
+  <br>
+
+  <br>
+  <div class="padding">
+
+    <div class="containerR" style="justify-content: space-around">
+
+    <div class="card" style="width: 20rem;">
+<!--      <a href="http://localhost:4200/ishiharaTest/{{idMedicalRecord}}">-->
+        <a (click)="navigateTo('/ishiharaTest/'+idMedicalRecord)" style="cursor: pointer">
+      <img class="card-img-top" src="https://i.pinimg.com/originals/12/92/c2/1292c23b266b61cda01cf54db6ff7a3f.png" alt="Card image cap">
+      </a>
+      <div class="card-body">
+        <p class="card-text" style="font-weight: bold; font-size: 20px;">Test de Ishihara.</p>
+        <p class="card-text">Identifique formas, números o letras en las imágenes mostradas.</p>
+      </div>
+    </div>
+
+      <div class="card" style="width: 24rem;">
+<!--        <a href="http://localhost:4200/farnsworthTest/{{idMedicalRecord}}">-->
+          <a (click)="navigateTo('/farnsworthTest/'+idMedicalRecord)" style="cursor: pointer">
+          <img class="card-img-top" src="https://pbs.twimg.com/media/DaqqokuWAAAl91_.jpg" alt="Card image cap">
+        </a>
+        <div class="card-body">
+          <p class="card-text" style="font-weight: bold; font-size: 20px;">Test de Farnsworth Munsell.</p>
+          <p class="card-text">Ordene las piezas mostradas en base a los tonos presentados.</p>
+          <p class="card-text">Las piezas de cada extremo son fijas y sirven como referencia del orden a seguir.</p>
+        </div>
+      </div>
+
+
+    </div>
+
+    <br>
+    <div class="containerR">
+
+
+      <a (click)="navigateTo('/medicalRecord/patient/' + medicalRecord.patient.id )" style="cursor: pointer">
+        <button type="button" class="btn btn-danger" style="margin-right: 2vw">Salir</button>
+      </a>
+
+<!--      <a (click)="navigateTo('/consultation')" style="cursor: pointer">-->
+<!--        <button type="button" class="btn btn-danger" style="margin-right: 2vw">Salir</button>-->
+<!--      </a>-->
+
+<!--        <a href="http://localhost:4200/medicalRecord/view/{{idMedicalRecord}}">-->
+          <a (click)="navigateTo('/medicalRecord/view/'+idMedicalRecord)" style="cursor: pointer">
+        <button type="button" class="btn btn-success" style="margin-right: 2vw">Finalizar</button>
+      </a>
+
+    </div>
+
+    <br>
+
+  </div>
+
+  </body>
+
+
+</main>
